@@ -7,67 +7,61 @@
 $if not session.userid:
    You need to be logged in.
 $else:
-	<div class="container">
-	        <div class="row centered-form">
-	        <div class="col-md-8">
-	        	<div class="panel panel-default">
-	        		<div class="panel-heading">
-				    		<h3 class="panel-title">Post your Books <small>It's free!</small></h3>
-				 			</div>
-				 			<div class="panel-body">
-				    		<form method="post" role="form" >
-				    			<div class="row">
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				                			<label  class="form-control input-sm">Condition</label>
-				    					</div>
-				    				</div>
-
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				    						<select name="condition" class="form-control input-sm">
-											  <option>Excellent</option>
-											  <option>Very Good</option>
-											  <option>Good</option>
-											  <option>Fair</option>
-											  <option>Poor</option>
-											</select>
-				    					</div>
-				    				</div>
-				    			</div>
-
-				    			<div class="row">
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				                			<input type="text" name="isbn" id="isbn" class="form-control input-sm" placeholder="ISBN">
-				    					</div>
-				    				</div>
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				    						<input type="text" name="title" id="title" class="form-control input-sm" placeholder="Title">
-				    					</div>
-				    				</div>
-				    			</div>
-
-				    			<div class="row">
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				                			<input type="text" name="author" id="author" class="form-control input-sm" placeholder="Author">
-				    					</div>
-				    				</div>
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
-				    					<div class="form-group">
-				    						<input type="text" name="price" id="price" class="form-control input-sm" placeholder="Price">
-				    					</div>
-				    				</div>
-				    			</div>
-				    			
-
-				    			<input type="submit" value="Post Book" class="btn btn-info btn-block">
-				    		
-				    		</form>
-				    	</div>
-		    		</div>
-	    		</div>
-	    	</div>
+    <section style="background: #fafafa;">
+	      <div class="container">
+	        <div class="row margin-bottom">
+	          <div class="col-md-12 text-center">
+	            <div class="heading">
+	              <h2>Post your books . Its free</h2>
+	            </div>
+	          </div>
+	          <div class="col-md-8 col-md-offset-2">
+	            <form method="post">
+	              <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="condition">Condition</label>
+	                    <select name="condition" class="form-control input-sm">
+						  <option>Excellent</option>
+						  <option>Very Good</option>
+						  <option>Good</option>
+						  <option>Fair</option>
+						  <option>Poor</option>
+						</select>
+	                   <!--  <input id="contion" type="text" class="form-control"> -->
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="isbn">ISBN</label>
+	                    <input id="isbn" name="isbn" type="text" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="title">Title</label>
+	                    <input id="title" name="title" type="text" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="author">Author</label>
+	                    <input name="author" type="text" id="author" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="price">Price</label>
+	                    <input id="price" name="price" type="text" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-12 text-center">
+	                  <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Submit</button>
+	                </div>
+	              </div>
+	            </form>
+	          </div>
+	        </div>
 	    </div>
+	</section>
+	

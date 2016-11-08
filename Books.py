@@ -35,8 +35,16 @@ class BookFind:
         isbnLkup = IsbnLookup()
         meta = isbnLkup.find(i.isbn)
         isbn13 = meta['ISBN-13']
-    	params = dict(isbn=i.isbn, isbn13=isbn13)
-        book_result = util.db.query('select * from books b, users u where b.userid=u.id and (b.isbn = $isbn or b.isbn13 = $isbn13) order by b.created desc', vars={'isbn' : i.isbn, 'isbn13' : isbn13})
+        if i.location and len(i.location.split()) == 2:
+            city = i.location.split(',')[0].strip()
+            state = i.location.split(',')[1].strip()
+            print("Location>> [{}] [{}]".format(city, state))
+            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $isbn or b.isbn13 = $isbn13) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
+            params = dict(isbn=i.isbn, isbn13=isbn13, city=city, state=state)
+        else:
+            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $isbn or b.isbn13 = $isbn13) order by b.created desc limit 200"""   
+            params = dict(isbn=i.isbn, isbn13=isbn13)
+        book_result = util.db.query(query, vars=params)
         books = list(book_result)
         meta['Authors']=','.join(map(str, meta['Authors']))
         for book in books:

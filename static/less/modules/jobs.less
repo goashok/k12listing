@@ -1,0 +1,47 @@
+.job-form-section {padding: 80px 0; background: #fafafa;
+
+                   // #gradient > .horizontal(darken(@variant-violet, 10%); @variant-violet; 20%; 80%);
+
+                   .job-main-form  {margin-bottom: 40px;
+
+                                    label {font-family: @headings-font-family; .uppercase; margin-left: 10px;}
+                   }
+
+                   &.job-form-section--compressed {padding: 20px;
+                                                   .job-main-form  {margin-bottom: 0;
+                                                   }
+                   }
+
+                   &.job-form-section--image {
+                       background: center center url('../img/meeting.jpg') no-repeat;
+                       background-size: cover;
+                   }
+
+}
+
+.job-main-form__button {margin-top: 25px; display: block; width: 100%;}
+
+.job-form-box {background-color:rgba(255,255,255,0.8); padding: 40px; margin-top: 40px; margin-bottom: 40px;}
+
+
+.job-listing {border: solid 1px @gray-lighter; border-bottom: none; padding-top: 30px; padding-bottom: 10px; padding-left: 4px; .clearfix; .ondrTransition;
+              &.job-listing--featured {border-left: solid 5px  @brand-primary; padding-left: 0;}
+              &.job-listing--last {border-bottom: solid 1px  @gray-lighter; margin-bottom: 40px;}
+              &:hover {background: #fafafa;}
+}
+.job-content {padding: 0 15px;}
+.job__title {margin-top: 0;}
+.job__star__link {color: @gray-light;
+                  &.active, &:hover {color: @brand-primary;}
+}
+.job__location {margin-right: 5px; color: @gray-light;}
+.job__star {text-align: right;}
+
+.featured__details {font-family: @headings-font-family; font-size: @font-size-small; .uppercase;}
+.featured__label{margin-left: 5px; position: relative; top: -2px;}
+
+.job-detail-description {text-align: center; .uppercase; font-family: @headings-font-family; color: @gray-light;}
+.job-detail__company-description {color: @gray-light;}
+.job-detail__social {text-align: left !important; padding: 20px 0;}
+.job-detail__apply-top {}
+.job-detail__apply-bottom {margin-top: 40px;}

@@ -28,7 +28,16 @@ class GameFind:
         pagenum=0
         offset=pagenum*10
         titleQueryStr = "%" + i.title + "%"
-        game_result = util.db.query('select * from games g, users u where g.userid=u.id and g.title ilike $title order by g.created desc', vars={'title' : titleQueryStr})
+        if i.location and len(i.location.split()) == 2:
+            city = i.location.split(',')[0].strip()
+            state = i.location.split(',')[1].strip()
+            print("Location>> [{}] [{}]".format(city, state))
+            query = """select * from games g, users u where g.userid=u.id and g.title ilike $title and u.city ilike $city and u.state ilike $state order by g.created desc limit 200"""   
+            params = dict(title=titleQueryStr, city=city, state=state)
+        else:
+            query = """select * from games g, users u where g.userid=u.id and g.title ilike $title order by g.created desc limit 200"""   
+            params = dict(title=titleQueryStr)
+        game_result = util.db.query(query, vars=params)
         games = list(game_result)
         for game in games:
             game['labelCondition'] = labels[game.condition]
@@ -41,7 +50,8 @@ class GamePost:
     def POST(self):
         i = web.input()
         if(i.title == "" or i.condition == "" or i.price == "" or i.console == ""):
-            return "Title, Console, Condition & Price fields are mandatory"
+            appSession.flash("error", "Title, Condition and Price are mandatory")
+            return render.post()
         util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted game title:{} successfully".format(i.title))
         raise web.redirect("")

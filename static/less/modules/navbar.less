@@ -1,0 +1,46 @@
+/*
+
+=====================
+NAVBAR
+=====================
+
+*/
+
+.header {width: 100%;}
+
+.navbar {
+    .uppercase;
+    @media (min-width: @grid-float-breakpoint) { 
+        ul.nav > li > a {border-top: solid 5px transparent;  padding-top:  (@navbar-padding-vertical - 5);
+                         &:hover {border-top-color: @navbar-theme-link-border;}
+        }
+
+        ul.nav > li.active >  a, ul.nav > li.open >  a  {text-decoration: none !important; border-top-color: @navbar-theme-link-border;}
+
+    }
+}
+
+.navbar-toggle {.uppercase; color: @navbar-theme-link;}
+
+ul.dropdown-menu {
+    li {
+        a {.ondrTransition();
+           &:hover {.ondrTransition();}
+        }
+    }
+}
+
+#login-modal {overflow: hidden;
+              .modal-header {
+                  h4 {text-transform: uppercase;}
+              }
+              form {margin-bottom: @line-height-computed;}
+              a {color: @brand-primary;}
+              p {font-weight: 300; margin-bottom: @line-height-computed; font-size: @font-size-base - 1;}
+
+
+}
+
+.modal-backdrop {
+    z-index: 1035;
+}

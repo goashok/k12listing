@@ -1,0 +1,69 @@
+
+// variables-custom.less - to change colour variant, rounded corners, etc.
+@import "modules/variables-custom.less";
+// bootstrap mixins
+@import "modules/mixins.less";
+// custom mixins
+@import "modules/mixins-custom.less";
+// navbar
+@import "modules/navbar.less";
+// general styles - body, .ribbon, .box
+@import "modules/general.less";
+// homepage elements - advantages, slider, full screen homepage
+@import "modules/homepage.less";
+// boxes
+@import "modules/boxes.less";
+// carousels
+@import "modules/carousels.less";
+// packages
+@import "modules/packages.less";
+// jobs listing
+@import "modules/jobs.less";
+
+// pages - 404, contact, text page
+@import "modules/pages.less";
+// blog
+@import "modules/blog.less";
+
+// footer
+@import "modules/footer.less";
+// demo styling
+@import "modules/demo.less";
+
+// bootstrap base stylesheet overrides
+@import "theme.less";
+
+
+
+/*
+
+=====================
+SOCIAL LINKS
+=====================
+
+*/
+
+.contact-form {margin-bottom: 20px;}
+
+p.social {text-align: center; margin-top:  20px;
+          a {margin: 0 10px 0 0; color: #fff; display: inline-block; width: 26px; height: 26px; border-radius: 13px; line-height: 26px; font-size: 15px; text-align: center; .ondrTransition; vertical-align: bottom; border: solid 1px #ccc;
+             i {vertical-align: bottom; line-height: 26px;}
+             &.facebook {background-color: #4460ae; border-color: #4460ae;}
+             &.gplus {background-color: #c21f25; border-color: #c21f25;}
+             &.twitter {background-color: #3cf; border-color: #3cf;}
+             &.instagram {background-color: #cd4378; border-color: #cd4378;}
+             &.email {background-color: #4a7f45; border-color: #4a7f45;}
+             &.link {background-color: #871AFF; border-color: #871AFF;}
+          }
+          &.social--outline {
+              a {background: transparent;
+                 &.facebook {color: #4460ae; border-color: #4460ae;}
+                 &.gplus {color: #c21f25; border-color: #c21f25;}
+                 &.twitter {color: #3cf; border-color: #3cf;}
+                 &.instagram {color: #cd4378; border-color: #cd4378;}
+                 &.email {color: #4a7f45; border-color: #4a7f45;}
+                 &.link {color: #871AFF; border-color: #871AFF;}
+              }
+
+          }
+}

@@ -11,62 +11,100 @@ $code:
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>K12Listing</title>
     <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>$content.get('title')</title>
-
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/app.css">
-
-    <link rel="shortcut icon" href="/static/favico.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto for copy, Montserrat for headings-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="/static/css/owl.carousel.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
   </head>
   <body>
-     <div class="navbar navbar-inverse navbar-fixed-top">
-       <div class="container">
-         <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">K12Listing</a>
-         </div>
-         <div class="collapse navbar-collapse">
-           <ul class="nav navbar-nav">
-             <li class="active"><a href="/">Home</a></li>
-             <li class="dropdown">
-                <a href="/books" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Books <span class="caret"></span></a>
+    <!-- navbar-->
+    <header class="header">
+      <div role="navigation" class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header"><a href="/" class="navbar-brand"><img src="" alt="K12Listing" class="hidden-xs hidden-sm"><img src="" alt="logo" class="visible-xs visible-sm"><span class="sr-only">Go to homepage</span></a>
+            <div class="navbar-buttons">
+              <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="fa fa-align-justify"></i></button>
+            </div>
+          </div>
+          <div id="navigation" class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Books <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                  <li><a href="/books">Find</a></li>
                   <li><a href="/books/post">Post</a></li>
-                  <li><a href="/books">Search</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
-                <a href="/games" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></a>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Games <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                  <li><a href="/games">Find</a></li>
                   <li><a href="/games/post">Post</a></li>
-                  <li><a href="/games">Search</a></li>
                 </ul>
               </li>
-             <li><a href="/about">About</a></li>
-
-             $if isLoggedIn:
-                 <li><a href="/logout">Logout</a></li>
-                 <li><a href="/login/settings">Logged in as $username</a></li>
-                 <li><a href="/login/manage">Manage</a></li>
-             $else:
-                 <li><a href="/login">Login</a></li>
-           </ul>
-         </div><!--/.nav-collapse -->
-       </div>
-     </div>
-
-     <div class="container">
+              <li><a href="/about">About us</a></li>
+              $if isLoggedIn:
+                  <li><a href="/login/manage">Manage</a></li> 
+            </ul>
+            $if isLoggedIn:
+                <a href="/logout" class="btn navbar-btn btn-white"><i class="fa fa-sign-in"></i>Logout</a>
+            $else:
+                <a href="#" data-toggle="modal" data-target="#login-modal" class="btn navbar-btn btn-white"><i class="fa fa-sign-out"></i>Log in</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- *** LOGIN MODAL ***_________________________________________________________
+    -->
+    <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+            <h4 id="Login" class="modal-title">Customer login</h4>
+          </div>
+          <div class="modal-body">
+            <form action="/login" method="post">
+              <div class="form-group">
+                <input id="username" name="username" type="text" placeholder="Username" class="form-control">
+              </div>
+              <div class="form-group">
+                <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+              </div>
+              <p class="text-center">
+                <!-- <button type="button" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button> -->
+                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+              </p>
+            </form>
+            <p class="text-center text-muted">Not registered yet?</p>
+            <p class="text-center text-muted"><a href="/login/register"><strong>Register now</strong></a>! It is free and done in less than a minute !<a href="/login/forgot"><strong>Forgot?</strong></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *** LOGIN MODAL END ***-->
+    
+    <div class="container">
      $if session.flash['error']:
         <div class="row">
           <div class="col-md-12">
@@ -93,8 +131,60 @@ $code:
          appSession.clearFlash()
      </div> <!-- /container -->
 
-    <script src="/static/js/jquery.js"></script>
+     <footer class="footer">
+      <div class="footer__block">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <h4>About K12Listings</h4>
+              <p>K12Listing is a <strong>listing site for K12 items</strong> founded by students of Marlboro Memorial and J.P. Stevens schools of NJ - <a href="">Jasmine Shamnani</a> and <a href="">Arvin Satwani</a></p>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <h4>This Theme</h4>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/books">Books</a></li>
+                <li><a href="/games">Games</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <h4>Our offices</h4>
+              <h5>Marlboro, NJ</h5>
+              <p> 7 Chase Dr<br />Marlboro, NJ<br />Tel + 1 347 528 4469</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p>&copy;2016 K12Listing</p>
+            </div>
+            <div class="col-md-6">
+              <p class="credit pull-right">Theme by <a href="http://ondrejsvestka.cz">Ondrej Svestka</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Javascript files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/jquery-1.11.0.min.js"><\/script>')</script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/jquery.cookie.js"> </script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/front.js"></script>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+    <!---->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
   </body>
 </html>

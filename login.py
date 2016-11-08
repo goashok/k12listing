@@ -78,7 +78,7 @@ class Register:
             util.db.insert('users', username=i.username, password=i.password, first_name=i.first_name, last_name=i.last_name, age=i.age, email=i.email, phone=i.phone, city=i.city, state=i.state, zip=i.zip)
             appSession.flash("success", "Successfully registered user {}".format(i.username))
             siteurl = web.ctx.env.get('HTTP_HOST', '')
-            referer = web.ctx.env.get('DUMMY', "http://"+siteurl+"/login")
+            referer = web.ctx.env.get('DUMMY', "http://"+siteurl)
             raise web.redirect(referer)
 
 class Settings:

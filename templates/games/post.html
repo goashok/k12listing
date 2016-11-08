@@ -7,7 +7,69 @@
 $if not session.userid:
    You need to be logged in.
 $else:
-	<div class="container">
+    <section style="background: #fafafa;">
+	      <div class="container">
+	        <div class="row margin-bottom">
+	          <div class="col-md-12 text-center">
+	            <div class="heading">
+	              <h2>Post your games . Its free</h2>
+	            </div>
+	          </div>
+	          <div class="col-md-8 col-md-offset-2">
+	            <form method="post">
+	              <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="condition">Condition</label>
+	                    <select name="condition" class="form-control input-sm">
+						  <option>Excellent</option>
+						  <option>Very Good</option>
+						  <option>Good</option>
+						  <option>Fair</option>
+						  <option>Poor</option>
+						</select>
+	                   <!--  <input id="contion" type="text" class="form-control"> -->
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="console">Console</label>
+	                    <select name="console" class="form-control input-sm">
+	                      <option>3DS</option>
+						  <option>DS</option>
+						  <option>PS2</option>
+						  <option>PS3</option>
+						  <option>PS4</option>
+						  <option>Wii</option>
+						  <option>Wii U</option>
+						  <option>XBox One</option>
+						  <option>XBox 360</option>
+						</select>
+	                   <!--  <input id="contion" type="text" class="form-control"> -->
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="title">Title</label>
+	                    <input id="title" name="title" type="text" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="price">Price</label>
+	                    <input id="price" name="price" type="text" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-12 text-center">
+	                  <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Submit</button>
+	                </div>
+	              </div>
+	            </form>
+	          </div>
+	        </div>
+	    </div>
+	</section>
+	<!-- <div class="container">
 	        <div class="row centered-form">
 	        <div class="col-md-8">
 	        	<div class="panel panel-default">
@@ -80,4 +142,4 @@ $else:
 		    		</div>
 	    		</div>
 	    	</div>
-	    </div>
+	    </div> -->
