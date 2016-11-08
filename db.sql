@@ -3,10 +3,10 @@ CREATE TYPE condition AS ENUM ('Excellent', 'Very Good', 'Good', 'Fair', 'Poor')
 
 create table users(
  id serial primary key,  
- username  varchar(50) ,
+ username  varchar(50) unique,
  password  varchar(50) ,                      
  first_name varchar(50),                       
- last_name  varchar(50,                      
+ last_name  varchar(50),                      
  age        integer,                     
  email      varchar(50),                    
  phone      varchar(12), 
@@ -40,3 +40,13 @@ create table games(
 	created timestamp default now()
 
 )
+
+
+
+select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'book' as type
+from users u, books b
+where u.id = b.userid
+union
+select u.id as userid, u.username, u.email, g.id as itemid, g.title, g.price, g.condition , g.console as identifier, 'game' as type
+from users u, games g
+where u.id = g.userid

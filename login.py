@@ -21,10 +21,14 @@ urls = (
   "", "Login",
   "/register", "Register",
   "/settings", "Settings",
-  "/forgot", "Forgot"
+  "/forgot", "Forgot",
+  "/manage", "Manage",
+  "/delete/(.+)/(.+)", "Delete"
 )
 
 app = web.application(urls, globals())
+
+labels = {'Excellent' : 'label-success', 'Very Good' : 'label-primary', 'Good' : 'label-info', 'Fair' : 'label-warning', 'Poor' : 'label-danger'}
 
 
 class Login:
@@ -119,5 +123,43 @@ class Forgot:
     	else:
     		user = users[0]
     		mail.send(i.email, "K12Exchange Password request", "Your password is " + user.password)
+
+class Manage:
+    def GET(self):
+        query = """select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'Book' as type, b.created
+                   from users u, books b
+                   where u.id=$userid and u.id = b.userid
+                   union
+                   select u.id as userid, u.username, u.email, g.id as itemid, g.title, g.price, g.condition , g.console as identifier, 'Game' as type, g.created
+                   from users u, games g
+                   where u.id=$userid and u.id = g.userid
+                   """
+        items_result = util.db.query(query, vars={'userid' : web.ctx.session.userid})
+        items = list(items_result)
+        for item in items:
+            item['labelCondition'] = labels[item.condition]
+        return render.manage(items)
+
+class Delete:
+    def GET(self, itemType, itemId):
+        print "Deleting " + itemType + "," + itemId
+        itemIdInt = int(itemId)
+        if itemType == "Book":
+            books = util.db.select("books", vars=locals(), where="id = $itemIdInt")
+            if books and books[0].userid == web.ctx.session.userid:
+                util.db.delete('books', where="id=$itemIdInt", vars=locals())
+            else:
+                appSession.flash("error", "Cannot find book or you are not the owner of the posting")
+                return Manage().GET()
+        if itemType == "Game":
+            games = util.db.select("games", vars=locals(), where="id = $itemIdInt")
+            if games and games[0].userid == web.ctx.session.userid:
+                util.db.delete('games', where="id=$itemIdInt", vars=locals())
+            else:
+                appSession.flash("error", "Cannot find game or you are not the owner of the posting")
+                return Manage().GET()
+
+        return Manage().GET()
+
 
 app_login = app
