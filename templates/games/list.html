@@ -1,0 +1,47 @@
+$def with (games, pagenum)
+
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/games">Games</a></li>
+  <li><a href="/games/post">Post</a></li>
+</ol>
+
+<div class="container">
+	<div class="row">
+		<div class="span5">
+            <table class="table table-striped table-condensed">
+                  <thead>
+                  <tr>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Posted Title</th>
+                      <th>Console</th>
+                      <th>Posted On</th>
+                      <th>Price</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Zip</th>
+                      <th>Condition</th>                                          
+                  </tr>
+              </thead>   
+              <tbody>
+                $for game in games:
+                    <tr>
+                        <td>$game.username</td>
+                        <td>$game.email</td>
+                        <td>$game.phone</td>
+                        <td>$game.title</td>
+                        <td>$game.console</td>
+                        <td>$game.created</td>
+                        <td>$game.city</td>
+                        <td>$game.state</td>
+                        <td>$game.zip</td>
+                        <td>$game.price</td>
+                        <td><span class="label $game.labelCondition">$game.condition</span></td>                                       
+                  </tr>                                  
+              </tbody>
+            </table>
+            </div>
+	</div>
+</div>

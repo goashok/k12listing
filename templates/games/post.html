@@ -1,0 +1,83 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/games">Games</a></li>
+  <li><a href="/games/post">Post</a></li>
+</ol>
+
+$if not session.userid:
+   You need to be logged in.
+$else:
+	<div class="container">
+	        <div class="row centered-form">
+	        <div class="col-md-8">
+	        	<div class="panel panel-default">
+	        		<div class="panel-heading">
+				    		<h3 class="panel-title">Post your Games <small>It's free!</small></h3>
+				 			</div>
+				 			<div class="panel-body">
+				    		<form method="post" role="form" >
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				                			<label  class="form-control input-sm">Condition</label>
+				    					</div>
+				    				</div>
+
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<select name="condition" class="form-control input-sm">
+											  <option>Excellent</option>
+											  <option>Very Good</option>
+											  <option>Good</option>
+											  <option>Fair</option>
+											  <option>Poor</option>
+											</select>
+				    					</div>
+				    				</div>
+				    			</div>
+
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				                			<label  class="form-control input-sm">Console</label>
+				    					</div>
+				    				</div>
+
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<select name="console" class="form-control input-sm">
+				    						  <option>3DS</option>
+				    						  <option>DS</option>
+											  <option>PS2</option>
+											  <option>PS3</option>
+											  <option>PS4</option>
+											  <option>Wii</option>
+											  <option>Wii U</option>
+											  <option>XBox One</option>
+											  <option>XBox 360</option>
+											</select>
+				    					</div>
+				    				</div>
+				    			</div>
+
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<input type="text" name="title" id="title" class="form-control input-sm" placeholder="Title">
+				    					</div>
+				    				</div>
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<input type="text" name="price" id="price" class="form-control input-sm" placeholder="Price">
+				    					</div>
+				    				</div>
+				    			</div>
+
+				    			<input type="submit" value="Post Game" class="btn btn-info btn-block">
+				    		
+				    		</form>
+				    	</div>
+		    		</div>
+	    		</div>
+	    	</div>
+	    </div>

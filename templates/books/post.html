@@ -1,0 +1,73 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/books">Books</a></li>
+  <li><a href="/books/post">Post</a></li>
+</ol>
+
+$if not session.userid:
+   You need to be logged in.
+$else:
+	<div class="container">
+	        <div class="row centered-form">
+	        <div class="col-md-8">
+	        	<div class="panel panel-default">
+	        		<div class="panel-heading">
+				    		<h3 class="panel-title">Post your Books <small>It's free!</small></h3>
+				 			</div>
+				 			<div class="panel-body">
+				    		<form method="post" role="form" >
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				                			<label  class="form-control input-sm">Condition</label>
+				    					</div>
+				    				</div>
+
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<select name="condition" class="form-control input-sm">
+											  <option>Excellent</option>
+											  <option>Very Good</option>
+											  <option>Good</option>
+											  <option>Fair</option>
+											  <option>Poor</option>
+											</select>
+				    					</div>
+				    				</div>
+				    			</div>
+
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				                			<input type="text" name="isbn" id="isbn" class="form-control input-sm" placeholder="ISBN">
+				    					</div>
+				    				</div>
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<input type="text" name="title" id="title" class="form-control input-sm" placeholder="Title">
+				    					</div>
+				    				</div>
+				    			</div>
+
+				    			<div class="row">
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				                			<input type="text" name="author" id="author" class="form-control input-sm" placeholder="Author">
+				    					</div>
+				    				</div>
+				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    					<div class="form-group">
+				    						<input type="text" name="price" id="price" class="form-control input-sm" placeholder="Price">
+				    					</div>
+				    				</div>
+				    			</div>
+				    			
+
+				    			<input type="submit" value="Post Book" class="btn btn-info btn-block">
+				    		
+				    		</form>
+				    	</div>
+		    		</div>
+	    		</div>
+	    	</div>
+	    </div>
