@@ -41,8 +41,7 @@ class BookFind:
         try:
             meta = isbnLkup.find(i.isbn)
         except:
-            meta = {}
-            return render.list([], meta, 0)
+            meta = {'ISBN-13':'-1'}
         isbn13 = meta['ISBN-13']
         if i.location and len(i.location.split()) == 2:
             city = i.location.split(',')[0].strip()
@@ -70,7 +69,10 @@ class BookPost:
         if not i.isbn:
             appSession.flash("error", "No isbn specified")
             return render.post()
-        meta = isbnLkup.find(i.isbn)
+        try:
+            meta = isbnLkup.find(i.isbn)
+        except:
+            meta = {'ISBN-13' : i.isbn}
         isbn13 = meta['ISBN-13']
         if(i.isbn == "" or i.condition == "" or i.price == ""):
             appSession.flash("error", "Condition and Price are mandatory")
