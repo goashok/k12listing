@@ -73,6 +73,8 @@ class BookPost:
             meta = isbnLkup.find(i.isbn)
         except:
             meta = {'ISBN-13' : i.isbn}
+        if not meta:
+            meta = {'ISBN-13' : i.isbn}
         isbn13 = meta['ISBN-13']
         if(i.isbn == "" or i.condition == "" or i.price == ""):
             appSession.flash("error", "Condition and Price are mandatory")
