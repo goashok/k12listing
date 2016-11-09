@@ -4,7 +4,7 @@ import os
 web.config.smtp_server = 'smtp.gmail.com'
 web.config.smtp_port = 587
 web.config.smtp_username = 'k12listing@gmail.com'
-web.config.smtp_password = os.environ['K12_MAIL_PWD']
+web.config.smtp_password = os.environ.get('K12_MAIL_PWD')
 web.config.smtp_starttls = True
 
 
