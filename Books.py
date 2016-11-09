@@ -23,7 +23,12 @@ appSession = AppSession()
 
 class BookFind:
     def GET(self):
-    	return render.find()
+        query = """select * from books b, users u where b.userid=u.id order by b.created desc limit 200"""
+        book_result = util.db.query(query)
+        books = list(book_result)
+        for book in books:
+            book['labelCondition'] = labels[book.condition]
+    	return render.find(books)
 
     def POST(self):
     	i = web.input()
@@ -33,7 +38,11 @@ class BookFind:
             appSession.flash("error", "No isbn specified")
             return render.find()
         isbnLkup = IsbnLookup()
-        meta = isbnLkup.find(i.isbn)
+        try:
+            meta = isbnLkup.find(i.isbn)
+        except:
+            meta = {}
+            return render.list([], meta, 0)
         isbn13 = meta['ISBN-13']
         if i.location and len(i.location.split()) == 2:
             city = i.location.split(',')[0].strip()

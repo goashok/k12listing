@@ -1,23 +1,12 @@
+$def with(games)
+
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/games">Games</a></li>
   <li><a href="/games/post">Post</a></li>
 </ol>
 
-<!-- <div class="row">
-	<h2>Search Games</h2>
-    <form role="form" method="post">
-       <div id="custom-search-input">
-            <div class="input-group col-md-8">
-                <input type="text" name="title" class="  search-query form-control" placeholder="Game Title" />
-            </div>
-            <div class="input-group col-md-2">
-                <input type="submit" value="Find" class="btn btn-info btn-block">
-                
-            </div>
-        </div>
-    </form>
-</div> -->
+
 
 <section class="job-form-section job-form-section--image">
       <div class="container">
@@ -37,7 +26,7 @@
                     <div class="col-sm-5">
                       <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" id="location" name="location" placeholder="Any particular location? Eg. Marlboro, NJ" class="form-control">
+                        <input type="text" id="location" name="location" placeholder="Optional. Marlboro, NJ" class="form-control">
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -48,6 +37,43 @@
               </form>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section>
+      <div class="container">
+        <h3 class="heading">Sampling of current <span class="accent">games</span></h3>
+
+        $for game in games:
+            $code:
+                displayTime = game.created.strftime("%m-%d-%y %H:%M:%S")     
+            <div class="job-listing  ">
+              <div class="row">
+              
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><h4>$game.username</h4>
+                    <p>$game.email</p>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$game.title</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$game.price</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><i class="fa fa-map-marker job__location"></i>$game.city</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$game.state</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2">$displayTime</div>
+                
+              </div>
+            </div>
+        
+        <div class="pages">
+          <p class="load-more"> <a href="#" class="btn btn-primary"><i class="fa fa-chevron-down"></i> Load more</a></p>
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"> <a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
         </div>
       </div>
     </section>

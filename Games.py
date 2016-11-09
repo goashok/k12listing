@@ -21,7 +21,12 @@ appSession = AppSession()
 
 class GameFind:
     def GET(self):
-    	return render.find()
+        query = """select * from games g, users u where g.userid=u.id order by g.created desc limit 200"""
+        game_result = util.db.query(query)
+        games = list(game_result)
+        for game in games:
+            game['labelCondition'] = labels[game.condition]
+    	return render.find(games)
 
     def POST(self):
     	i = web.input()
