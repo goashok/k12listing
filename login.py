@@ -122,7 +122,7 @@ class Forgot:
     		return "Cannot find that email in our system"
     	else:
     	    user = users[0]
-    	    mail.send(i.email, "K12Exchange Password request", "Your username/password is " + user.username + "/" + user.password)
+    	    mail.send(i.email, "K12Listing Password request", "Your username/password is " + user.username + "/" + user.password)
             appSession.flash("success", "Information about your login has been mailed")
             return render.forgot()
 
