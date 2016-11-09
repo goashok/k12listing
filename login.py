@@ -39,18 +39,17 @@ class Login:
     	i = web.input()
     	params = dict(username=i.username, password=i.password)
     	users = util.db.select('users', params, where='username = $username')
+        siteurl = web.ctx.env.get('HTTP_HOST', '')
+        referer = web.ctx.env.get('DUMMY', "http://"+siteurl)
     	if not users:
             appSession.flash("error", "User {} Not found".format(i.username))
-            return render.login()
-            #return "User {} not found".format(i.username)
+            return web.redirect(referer)
         user = users[0]
         if(i.password != user.password):
             appSession.flash("error", "Incorrect password for user {}".format(i.username))
-            return render.login()
+            return web.redirect(referer)
         web.ctx.session.username = user.username
         web.ctx.session.userid = user.id
-        siteurl = web.ctx.env.get('HTTP_HOST', '')
-        referer = web.ctx.env.get('DUMMY', "http://"+siteurl)
         raise web.redirect(referer)
 
 class Register:
