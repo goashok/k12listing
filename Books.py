@@ -34,27 +34,32 @@ class BookFind:
     	i = web.input()
         pagenum=0
         offset=pagenum*10
-        if not i.isbn:
-            appSession.flash("error", "No isbn specified")
-            return render.find()
+        if not i.term:
+            appSession.flash("error", "No search term specified")
+            return render.find(books=[])
         isbnLkup = IsbnLookup()
         try:
-            meta = isbnLkup.find(i.isbn)
+            meta = isbnLkup.find(i.term)
         except:
-            meta = {'ISBN-13':'-1'}
-        isbn13 = meta['ISBN-13']
+            meta = None
+        if meta:
+            isbn13 = meta['ISBN-13']
+        else:
+            isbn13 = ''
+        titleTerm = '%' + i.term + "%"
         if i.location and len(i.location.split()) == 2:
             city = i.location.split(',')[0].strip()
             state = i.location.split(',')[1].strip()
             print("Location>> [{}] [{}]".format(city, state))
-            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $isbn or b.isbn13 = $isbn13) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
-            params = dict(isbn=i.isbn, isbn13=isbn13, city=city, state=state)
+            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $titleTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
+            params = dict(isbn=i.term, isbn13=isbn13, city=city, state=state, titleTerm=titleTerm)
         else:
-            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $isbn or b.isbn13 = $isbn13) order by b.created desc limit 200"""   
-            params = dict(isbn=i.isbn, isbn13=isbn13)
+            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $term or b.title ilike $titleTerm) order by b.created desc limit 200"""   
+            params = dict(term=i.term, isbn13=isbn13, titleTerm=titleTerm)
         book_result = util.db.query(query, vars=params)
         books = list(book_result)
-        meta['Authors']=','.join(map(str, meta['Authors']))
+        if meta:
+            meta['Authors']=','.join(map(str, meta['Authors']))
         for book in books:
             book['labelCondition'] = labels[book.condition]
         return render.list(books, meta, pagenum)
