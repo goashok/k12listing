@@ -49,7 +49,7 @@ class ContactSeller:
         Hope your kids enjoy the {}""".format(seller.email, i.itemtype)
         mail.send(seller.email, seller_subject, seller_comment)
         mail.send(buyer.useremail, buyer_subject, buyer_comment)
-        appSession.flash("success", "Sent email to the seller. We also sent you the seller's contacts")
+        appSession.flash("success", "Sent email to the seller. We also sent you the seller's contact")
         raise web.redirect(referer)
 
 
