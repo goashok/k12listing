@@ -4,6 +4,7 @@ import web
 import login
 import Books
 import Games
+import Contact
 from AppSession import AppSession
 
 import config
@@ -14,6 +15,7 @@ urls = (
     '/login', login.app_login,
     '/books', Books.app_books,
     '/games', Games.app_games, 
+    '/contact', Contact.app_contact,
     '/logout', 'Logout',
     '/about', 'About',
     r'/', 'Index',

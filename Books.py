@@ -23,7 +23,7 @@ appSession = AppSession()
 
 class BookFind:
     def GET(self):
-        query = """select * from books b, users u where b.userid=u.id order by b.created desc limit 200"""
+        query = """select *,b.id as bookid from books b, users u where b.userid=u.id order by b.created desc limit 200"""
         book_result = util.db.query(query)
         books = list(book_result)
         for book in books:
@@ -51,10 +51,10 @@ class BookFind:
             city = i.location.split(',')[0].strip()
             state = i.location.split(',')[1].strip()
             print("Location>> [{}] [{}]".format(city, state))
-            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $titleTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
+            query = """select *,b.id as bookid from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $titleTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
             params = dict(isbn=i.term, isbn13=isbn13, city=city, state=state, titleTerm=titleTerm)
         else:
-            query = """select * from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $term or b.title ilike $titleTerm) order by b.created desc limit 200"""   
+            query = """select *, b.id as bookid from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $term or b.title ilike $titleTerm) order by b.created desc limit 200"""   
             params = dict(term=i.term, isbn13=isbn13, titleTerm=titleTerm)
         book_result = util.db.query(query, vars=params)
         books = list(book_result)
@@ -65,11 +65,18 @@ class BookFind:
         return render.list(books, meta, pagenum)
 
 class BookPost:
+    def strip(self, param):
+        return param.strip()
+
     def GET(self):
         return render.post()
 
     def POST(self):
         i = web.input()
+        attrs = ['title', 'author']
+        for attr in attrs:
+            atrrval = getattr(i, attr)
+            setattr(i, attr, str(getattr(i, attr)).strip())
         isbnLkup = IsbnLookup()
         if not i.isbn:
             appSession.flash("error", "No isbn specified")
@@ -81,10 +88,10 @@ class BookPost:
         if not meta:
             meta = {'ISBN-13' : i.isbn}
         isbn13 = meta['ISBN-13']
-        if(i.isbn == "" or i.condition == "" or i.price == ""):
-            appSession.flash("error", "Condition and Price are mandatory")
+        if(i.isbn == "" or i.condition == "" or i.title == "" or i.price == "" or i.price == "$"):
+            appSession.flash("error", "ISBN, Title, Condition and Price are mandatory")
             return render.post()
-        util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price, author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
+        util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$",""), author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted book isbn:{} successfully".format(i.isbn))
         raise web.redirect("")
 

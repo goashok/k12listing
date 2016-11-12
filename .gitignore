@@ -38,3 +38,4 @@ sessions/
 logs/*.log
 
 .pyc
+passwd.txt

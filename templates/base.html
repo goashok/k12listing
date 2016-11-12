@@ -55,7 +55,7 @@ $code:
                   <li><a href="/books">Find</a></li>
                   <li><a href="/books/post">Post</a></li>
                 </ul>
-              </li>
+      o        </li>
               <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Games <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/games">Find</a></li>
@@ -103,6 +103,37 @@ $code:
       </div>
     </div>
     <!-- *** LOGIN MODAL END ***-->
+
+    <div id="contactFormModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+            <h4 id="ContactSeller" class="modal-title">Contact Seller</h4>
+          </div>
+          <div class="modal-body">
+            <form action="/contact" method="post">
+              <div class="form-group">
+                <input id="username" name="username" type="text" placeholder="Username" class="form-control" disabled="true">
+              </div>
+              <div class="form-group">
+                <textarea id="comment" name="comment" type="textarea" placeholder="Type your message here" class="form-control"></textarea>
+              </div>
+              <p class="text-center">
+                <!-- <button type="button" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button> -->
+                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Send</button>
+              </p>
+              <input type="hidden" id="userid" name="userid" value="" />
+              <input type="hidden" id="itemid" name="itemid" value="">
+              <input type="hidden" id="itemtype" name="itemtype" value="">
+              <input type="hidden" id="itemtitle" name="itemtitle" value="">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *** LOGIN MODAL END ***-->
+
     
     <div class="container">
      $if session.flash['error']:
@@ -185,6 +216,22 @@ $code:
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
+      
+      \$(document).on("click", ".class-contactFormModal", function () {
+         var username = \$(this).data('username');
+         var userid = \$(this).data('userid');
+         var itemid = \$(this).data('itemid');
+         var itemtype = \$(this).data('itemtype');
+         var itemtitle = \$(this).data('itemtitle');
+         \$(".modal-body #username").val( username );
+         \$(".modal-body #userid").val(userid);
+         \$(".modal-body #itemid").val(itemid);
+         \$(".modal-body #itemtype").val(itemtype);
+         \$(".modal-body #itemtitle").val(itemtitle);
+         // As pointed out in comments, 
+         // it is superfluous to have to manually call the modal.
+         // $('#contactFormModal').modal('show');
+      });
     </script>
   </body>
 </html>

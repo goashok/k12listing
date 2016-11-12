@@ -50,6 +50,7 @@ class Login:
             return web.redirect(referer)
         web.ctx.session.username = user.username
         web.ctx.session.userid = user.id
+        web.ctx.session.useremail = user.email
         raise web.redirect(referer)
 
 class Register:
@@ -59,7 +60,11 @@ class Register:
 
     def POST(self):
     	i = web.input()
-    	params = dict(username=i.username)
+    	params = dict(username=i.username, email=i.email)
+        users_byemail = util.db.select('users', params, where="email = $email")
+        if users_byemail:
+            appSession.flash("error", "User with email {} already exists".format(i.email))
+            return render.register()
     	users = util.db.select('users', params, where="username = $username")
     	if users:
             appSession.flash("error", "Username {} is already registered".format(i.username))
