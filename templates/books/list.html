@@ -52,21 +52,19 @@ $if meta:
         
         
         $for book in books:
-            $code:
-                displayTime = book.created.strftime("%m-%d-%y %H:%M:%S") 
             <div class="job-listing  ">
               <div class="row">
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$book.username" data-userid="$book.userid" data-itemid="$book.bookid" data-itemtype="Book" data-itemtitle="$book.title"><h4>$book.username</h4></a>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$book.username" data-userid="$book.userid" data-itemid="$book.bookid" data-itemtype="Book" data-itemtitle="$book.title"><h4>$book.username</h4></a> $book.isbn
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><strong>$book.title</strong>
-                    <p>$book.isbn</p>
+                    <p>$book.author</p>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">\$ $book.price
                    <p><span  class="label $book.labelCondition">$book.condition</span></p>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><i class="fa fa-map-marker job__location"></i>$book.city</div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">$book.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2 ">$displayTime</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2 ">$book.upload_time</div>
               </div>
             </div>
             

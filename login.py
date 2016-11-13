@@ -37,6 +37,7 @@ class Login:
 
     def POST(self):
     	i = web.input()
+        i.username = i.username.lower()
     	params = dict(username=i.username, password=i.password)
     	users = util.db.select('users', params, where='username = $username')
         siteurl = web.ctx.env.get('HTTP_HOST', '')
@@ -60,6 +61,8 @@ class Register:
 
     def POST(self):
     	i = web.input()
+        i.username = i.username.lower()
+        i.email = i.email.lower()
     	params = dict(username=i.username, email=i.email)
         users_byemail = util.db.select('users', params, where="email = $email")
         if users_byemail:

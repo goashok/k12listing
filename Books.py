@@ -23,7 +23,7 @@ appSession = AppSession()
 
 class BookFind:
     def GET(self):
-        query = """select *,b.id as bookid from books b, users u where b.userid=u.id order by b.created desc limit 200"""
+        query = """select *,b.id as bookid, to_char(b.created, 'YYYY-MM-DD HH:MI:SS AM') as upload_time from books b, users u where b.userid=u.id order by b.created desc limit 200"""
         book_result = util.db.query(query)
         books = list(book_result)
         for book in books:
@@ -51,10 +51,10 @@ class BookFind:
             city = i.location.split(',')[0].strip()
             state = i.location.split(',')[1].strip()
             print("Location>> [{}] [{}]".format(city, state))
-            query = """select *,b.id as bookid from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $titleTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""   
+            query = """select *,b.id as bookid, to_char(b.created, 'YYYY-MM-DD HH:MI:SS AM') as upload_time from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $titleTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""
             params = dict(isbn=i.term, isbn13=isbn13, city=city, state=state, titleTerm=titleTerm)
         else:
-            query = """select *, b.id as bookid from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $term or b.title ilike $titleTerm) order by b.created desc limit 200"""   
+            query = """select *, b.id as bookid, to_char(b.created, 'YYYY-MM-DD HH:MI:SS AM') as upload_time from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $term or b.title ilike $titleTerm) order by b.created desc limit 200"""
             params = dict(term=i.term, isbn13=isbn13, titleTerm=titleTerm)
         book_result = util.db.query(query, vars=params)
         books = list(book_result)

@@ -16,8 +16,6 @@ $def with (games, pagenum)
             <h3 class="heading">Sorry, we could not find any <span class="accent">games</span></h3>
 
         $for game in games:
-            $code:
-                displayTime = game.created.strftime("%m-%d-%y %H:%M:%S")     
             <div class="job-listing  ">
               <div class="row">
                 
@@ -31,7 +29,7 @@ $def with (games, pagenum)
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><i class="fa fa-map-marker job__location"></i>$game.city</div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$game.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2">$displayTime</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2">$game.upload_time</div>
                
               </div>
             </div>
