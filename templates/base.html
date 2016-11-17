@@ -63,6 +63,12 @@ $code:
                   <li><a href="/games/post">Post</a></li>
                 </ul>
               </li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Instruments <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/instruments">Find</a></li>
+                  <li><a href="/instruments/post">Post</a></li>
+                </ul>
+              </li>
               <li><a href="/about">About us</a></li>
               $if isLoggedIn:
                   <li><a href="/login/manage">Manage</a></li> 
@@ -135,6 +141,18 @@ $code:
     </div>
     <!-- *** LOGIN MODAL END ***-->
 
+    <div id="lightbox-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="imgsrc" src="" width="100%" height="100%">
+            </div>
+        </div>
+      </div>
+    </div>
     
     <div class="container">
      $if session.flash['error']:
@@ -239,6 +257,17 @@ $code:
          // it is superfluous to have to manually call the modal.
          // $('#contactFormModal').modal('show');
       });
+
+      \$(document).on("click", ".class-lightbox", function () {
+         var imgsrc = \$(this).data('imgsrc');
+         var imgtoset = document.getElementById("imgsrc");
+         imgtoset.src = imgsrc;
+         // As pointed out in comments,
+         // it is superfluous to have to manually call the modal.
+         // $('#contactFormModal').modal('show');
+      });
+
+
 
     </script>
   </body>

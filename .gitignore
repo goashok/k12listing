@@ -39,3 +39,5 @@ logs/*.log
 
 .pyc
 passwd.txt
+
+uploads

@@ -41,7 +41,18 @@ create table games(
 
 )
 
+create table instruments(
+	id serial primary key,
+	title varchar(120),
+	instrument varchar(50),
+	condition condition not null,
+	interest interest not null,
+	price numeric(10,2),
+	image_name varchar(120),
+	userid integer references users,
+	created timestamp default now()
 
+)
 
 select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'book' as type
 from users u, books b

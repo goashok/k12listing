@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
-  <li><a href="/games">Games</a></li>
-  <li><a href="/games/post">Post</a></li>
+  <li><a href="/instruments">Instruments</a></li>
+  <li><a href="/instruments/post">Post</a></li>
 </ol>
 
 $if not session.userid:
@@ -12,11 +12,11 @@ $else:
 	        <div class="row margin-bottom">
 	          <div class="col-md-12 text-center">
 	            <div class="heading">
-	              <h2>Post your <span class="accent">games</span> . Its <span class="accent">free</span></h2>
+	              <h2>Post your <span class="accent">instruments</span> . Its <span class="accent">free</span></h2>
 	            </div>
 	          </div>
 	          <div class="col-md-8 col-md-offset-2">
-	            <form method="post">
+	            <form method="post" enctype="multipart/form-data">
 	              <div class="row">
 	                <div class="col-sm-6">
 	                  <div class="form-group">
@@ -33,17 +33,54 @@ $else:
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
-	                    <label for="console">Console</label>
-	                    <select name="console" class="form-control input-sm">
-	                      <option>3DS</option>
-						  <option>DS</option>
-						  <option>PS2</option>
-						  <option>PS3</option>
-						  <option>PS4</option>
-						  <option>Wii</option>
-						  <option>Wii U</option>
-						  <option>XBox One</option>
-						  <option>XBox 360</option>
+	                    <label for="instrument">Instrument</label>
+	                    <select name="instrument" class="form-control input-sm">
+	                        <option>ALTO SAX</option>
+							<option>BARITONE HORN</option>
+							<option>BELL KIT</option>
+							<option>CELLO 1/2</option>
+							<option>CELLO 1/4</option>
+							<option>CELLO 3/4</option>
+							<option>CELLO 4/4</option>
+							<option>CELLO</option>
+							<option>BASS CLARINET*</option>
+							<option>CLARINET</option>
+							<option>DOUBLE BASS</option>
+							<option>DOUBLE BASS 1/2</option>
+							<option>DOUBLE BASS 1/4</option>
+							<option>DOUBLE BASS 1/8</option>
+							<option>DOUBLE BASS 3/4</option>
+							<option>DOUBLE HORN</option>
+							<option>DRUM KIT</option>
+							<option>EUPHONIUM</option>
+							<option>FLUTE</option>
+							<option>FRENCH HORN</option>
+							<option>GUITAR ACOUSTIC</option>
+							<option>GUITAR ELECTRIC</option>
+							<option>OBOE</option>
+							<option>PICCOLO</option>
+							<option>MP-KIT</option>
+							<option>TENOR SAX</option>
+							<option>TROMBONE</option>
+							<option>TRUMPET</option>
+							<option>VIOLA</option>
+							<option>VIOLA 10 INCH</option>
+							<option>VIOLA 11 INCH</option>
+							<option>VIOLA 12 INCH</option>
+							<option>VIOLA 13 INCH</option>
+							<option>VIOLA 14 INCH</option>
+							<option>VIOLA 15 INCH</option>
+							<option>VIOLA 15 1/2 INCH</option>
+							<option>VIOLA 16 INCH</option>
+							<option>VIOLA 16 1/2 INCH</option>
+							<option>VIOLIN</option>
+							<option>VIOLIN 1/8</option>
+							<option>VIOLIN 4/4</option>
+							<option>VIOLIN 1/2</option>
+							<option>VIOLIN 1/4</option>
+							<option>VIOLIN 3/4</option>
+							<option>VIOLIN 1/10</option>
+							<option>OTHER</option>
 						</select>
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
@@ -58,6 +95,12 @@ $else:
 	                  <div class="form-group">
 	                    <label for="price">Price</label>
 	                    <input id="price" name="price" type="text" class="form-control">
+	                  </div>
+	                </div>
+					  <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="instr_img">Upload Image</label>
+	                    <input id="instr_img" name="instr_img" type="file" class="form-control">
 	                  </div>
 	                </div>
 	                <div class="col-sm-12 text-center">

@@ -5,6 +5,7 @@ import login
 import Books
 import Games
 import Contact
+import Instruments
 from AppSession import AppSession
 
 import config
@@ -14,7 +15,8 @@ import model as m
 urls = (
     '/login', login.app_login,
     '/books', Books.app_books,
-    '/games', Games.app_games, 
+    '/games', Games.app_games,
+    '/instruments', Instruments.app_instruments,
     '/contact', Contact.app_contact,
     '/logout', 'Logout',
     '/about', 'About',

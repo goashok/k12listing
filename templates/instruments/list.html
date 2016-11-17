@@ -1,0 +1,56 @@
+$def with (instruments, pagenum)
+
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/instruments">Instruments</a></li>
+  <li><a href="/instruments/post">Post</a></li>
+</ol>
+
+
+
+ <section>
+      <div class="container">
+        <h3 class="heading">We have found your <span class="accent">instruments</span></h3>
+
+        $for instrument in instruments:
+            <div class="job-listing  ">
+              <div class="row">
+                <div class="col-xs-1">
+                  $if instrument.image_name:
+                    <a href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/instruments/${instrument.instrumentid}_${instrument.image_name}">
+                      <img src="/static/img/uploads/instruments/${instrument.instrumentid}_${instrument.image_name}" alt="test">
+                    </a>
+                  $else:
+                    <a href=""/>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$instrument.username" data-userid="$instrument.userid" data-itemid="$instrument.instrumentid" data-itemtype="Instrument" data-itemtitle="$instrument.title"><h4>$instrument.username</h4></a>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><strong>$instrument.title</strong>
+                    <p>$instrument.instrument</p>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">\$ $instrument.price
+                   <p><span  class="label $instrument.labelCondition">$instrument.condition</span></p>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><i class="fa fa-map-marker job__location"></i>$instrument.city</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$instrument.state</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2">$instrument.upload_time</div>
+
+              </div>
+            </div>
+
+
+
+        <!--<div class="pages">
+          <p class="load-more"> <a href="#" class="btn btn-primary"><i class="fa fa-chevron-down"></i> Load more</a></p>
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"> <a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>-->
+      </div>
+    </section>
+
