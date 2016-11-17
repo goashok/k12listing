@@ -73,10 +73,12 @@ class BookPost:
 
     def POST(self):
         i = web.input()
-        attrs = ['title', 'author']
+        attrs = ['title', 'author', 'isbn']
         for attr in attrs:
-            atrrval = getattr(i, attr)
-            setattr(i, attr, str(getattr(i, attr)).strip())
+            attrval = str(getattr(i, attr)).strip()
+            setattr(i, attr, attrval)
+            if attr == "isbn":
+                setattr(i, attr, attrval.replace(" ", ""))
         isbnLkup = IsbnLookup()
         if not i.isbn:
             appSession.flash("error", "No isbn specified")
