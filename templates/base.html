@@ -184,6 +184,7 @@ $code:
               <h4>Our offices</h4>
               <h5>Marlboro, NJ</h5>
               <p> Marlboro, NJ<br />Email k12listing@gmail.com</p>
+              <div class="fb-like" data-href="http://k12listing.com" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
             </div>
           </div>
         </div>
@@ -205,6 +206,14 @@ $code:
     <script src="/static/js/jquery.cookie.js"> </script>
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/front.js"></script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
     <!---->
     <script>
@@ -230,6 +239,7 @@ $code:
          // it is superfluous to have to manually call the modal.
          // $('#contactFormModal').modal('show');
       });
+
     </script>
   </body>
 </html>
