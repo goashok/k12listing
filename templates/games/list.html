@@ -10,30 +10,26 @@ $def with (games, pagenum)
 
 <section>
       <div class="container">
-        $if games:
-            <h3 class="heading">We have found your <span class="accent">games</span></h3>
-        $else:
-            <h3 class="heading">Sorry, we could not find any <span class="accent">games</span></h3>
+        <h3 class="heading">Sampling of current <span class="accent">games</span></h3>
 
         $for game in games:
             <div class="job-listing  ">
               <div class="row">
-                
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$game.username" data-userid="$game.userid" data-itemid="$game.gameid" data-itemtype="Game" data-itemtitle="$game.title"><h4>$game.username</h4></a>
+
+
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-0"><h4>$game.title</h4>
+                    <p>$game.console</p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><strong>$game.title</strong>
-                  <p>$game.console</p>
-                </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">\$ $game.price
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0">\$ $game.price
                    <p><span  class="label $game.labelCondition">$game.condition</span></p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2"><i class="fa fa-map-marker job__location"></i>$game.city</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2">$game.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2">$game.upload_time</div>
-               
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><i class="fa fa-map-marker job__location"></i>$game.city, $game.state</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0">$game.upload_time</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$game.username" data-userid="$game.userid" data-itemid="$game.gameid" data-itemtype="Game" data-itemtitle="$game.title"><span class="label label-default">Contact Seller</span></a>
+                </div>
               </div>
             </div>
-        
+
         <!--<div class="pages">
           <p class="load-more"> <a href="#" class="btn btn-primary"><i class="fa fa-chevron-down"></i> Load more</a></p>
           <ul class="pagination">
@@ -47,4 +43,5 @@ $def with (games, pagenum)
         </div>-->
       </div>
     </section>
+
 

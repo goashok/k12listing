@@ -45,30 +45,24 @@ $if meta:
 
 <section>
       <div class="container">
-        $if books:
-            <h3 class="heading">We have found your <span class="accent">books</span></h3>
-        $else:
-            <h3 class="heading">Sorry, we could not find any <span class="accent">books</span></h3>
-        
-        
+        <h3 class="heading">Sampling of current <span class="accent">books</span></h3>
+
         $for book in books:
             <div class="job-listing  ">
               <div class="row">
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$book.username" data-userid="$book.userid" data-itemid="$book.bookid" data-itemtype="Book" data-itemtitle="$book.title"><h4>$book.username</h4></a> $book.isbn
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-0"><h4>$book.title</h4  >
+                    <p>$book.author <br>$book.isbn</p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><strong>$book.title</strong>
-                    <p>$book.author</p>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0">\$ $book.price
+             <p><span  class="label $book.labelCondition">$book.condition</span></p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">\$ $book.price
-                   <p><span  class="label $book.labelCondition">$book.condition</span></p>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><i class="fa fa-map-marker job__location"></i>$book.city, $book.state</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0">$book.upload_time</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$book.username" data-userid="$book.userid" data-itemid="$book.bookid" data-itemtype="Book" data-itemtitle="$book.title"><span class="label label-default">Contact Seller</span></a>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 "><i class="fa fa-map-marker job__location"></i>$book.city</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-md-2 ">$book.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0 col-md-2 ">$book.upload_time</div>
               </div>
             </div>
-            
-        
+
         <!--<div class="pages">
           <p class="load-more"> <a href="#" class="btn btn-primary"><i class="fa fa-chevron-down"></i> Load more</a></p>
           <ul class="pagination">
