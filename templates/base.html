@@ -1,6 +1,14 @@
 $def with (content)
 
 $code:
+   def get_nav_class(pagetype):
+       path = web.ctx.fullpath.lower() + " " + web.ctx.homepath.lower()
+       if pagetype.lower() in path or (web.ctx.fullpath == "/" and pagetype == "home"):
+           return "active"
+       else:
+           return "inactive"
+
+$code:
    if session.get('username', ''):
        isLoggedIn = True
        username = session.get('username', '')
@@ -42,7 +50,7 @@ $code:
     <header class="header">
       <div role="navigation" class="navbar navbar-default">
         <div class="container">
-          <div class="navbar-header"><a href="/" class="navbar-brand"><img src="/static/img/logo.png" alt="K12Listing" class="hidden-xs hidden-sm"><img src="" alt="logo" class="visible-xs visible-sm"><span class="sr-only">Go to homepage</span></a>
+          <div class="navbar-header"><a href="/" class="navbar-brand"><img src="/static/img/logo.png" alt="K12Listing" class="hidden-xs hidden-sm"><img src="/static/img/logo.png" alt="K12Listing.com" class="visible-xs visible-sm"><span class="sr-only">Go to homepage</span></a>
             <div class="navbar-buttons">
               <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle navbar-btn">Menu<i class="fa fa-align-justify"></i></button>
             </div>
@@ -50,28 +58,28 @@ $code:
           beta
           <div id="navigation" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Books <b class="caret"></b></a>
+              <li class="$get_nav_class('home')"><a href="/">Home</a></li>
+              <li class="dropdown $get_nav_class('book')"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Books <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/books">Find</a></li>
                   <li><a href="/books/post">Post</a></li>
                 </ul>
                </li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Games <b class="caret"></b></a>
+              <li class="dropdown $get_nav_class('game')"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Games <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/games">Find</a></li>
                   <li><a href="/games/post">Post</a></li>
                 </ul>
               </li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Instruments <b class="caret"></b></a>
+              <li class="dropdown $get_nav_class('instrument')"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Instruments <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/instruments">Find</a></li>
                   <li><a href="/instruments/post">Post</a></li>
                 </ul>
               </li>
-              <li><a href="/about">About us</a></li>
+              <li class="$get_nav_class('about')"><a href="/about">About us</a></li>
               $if isLoggedIn:
-                  <li><a href="/login/manage">Manage</a></li> 
+                  <li class="$get_nav_class('manage')"><a href="/login/manage">Manage</a></li>
             </ul>
             $if isLoggedIn:
                 <a href="/logout" class="btn navbar-btn btn-white"><i class="fa fa-sign-in"></i>Logout</a>

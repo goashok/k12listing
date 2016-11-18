@@ -46,6 +46,7 @@ def session_hook():
     web.ctx.session = session
     web.template.Template.globals['session'] = session
     web.template.Template.globals['appSession'] = AppSession()
+    web.template.Template.globals['web'] = web
 
 class Index:
     def GET(self):
