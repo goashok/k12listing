@@ -35,9 +35,8 @@ class GameFind:
         pagenum=0
         offset=pagenum*10
         titleQueryStr = "%" + i.title + "%"
-        if i.location and len(i.location.split()) == 2:
-            city = i.location.split(',')[0].strip()
-            state = i.location.split(',')[1].strip()
+        if i.location and len(i.location.split(",")) == 2:
+            city, state = [l.strip() for l in i.location.split(",")]
             print("Location>> [{}] [{}]".format(city, state))
             query = """select *, g.id as gameid, to_char(g.created, 'YYYY-MM') as upload_time  from games g, users u where g.userid=u.id and g.title ilike $title and u.city ilike $city and u.state ilike $state order by g.created desc limit 200"""
             params = dict(title=titleQueryStr, city=city, state=state)

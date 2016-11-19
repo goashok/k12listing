@@ -49,9 +49,8 @@ class BookFind:
         else:
             isbn13 = ''
         searchTerm = '%' + i.term + "%"
-        if i.location and len(i.location.split()) == 2:
-            city = i.location.split(',')[0].strip()
-            state = i.location.split(',')[1].strip()
+        if i.location and len(i.location.split(",")) == 2:
+            city, state = [l.strip() for l in i.location.split(",")]
             print("Location>> [{}] [{}]".format(city, state))
             query = """select *,b.id as bookid, to_char(b.created, 'YYYY-MM-DD') as upload_time from books b, users u where b.userid=u.id and (b.isbn = $term or b.isbn13 = $isbn13 or b.title ilike $searchTerm or b.author ilike $searchTerm) and u.city ilike $city and u.state ilike $state order by b.created desc limit 200"""
             params = dict(term=i.term, isbn13=isbn13, city=city, state=state, searchTerm=searchTerm)

@@ -35,9 +35,8 @@ class InstrumentFind:
         pagenum=0
         offset=pagenum*10
         term = "%" + i.title + "%"
-        if i.location and len(i.location.split()) == 2:
-            city = i.location.split(',')[0].strip()
-            state = i.location.split(',')[1].strip()
+        if i.location and len(i.location.split(",")) == 2:
+            city, state = [l.strip() for l in i.location.split(",")]
             print("Location>> [{}] [{}]".format(city, state))
             query = """select *, i.id as instrumentid, to_char(i.created, 'YYYY-MM-DD') as upload_time  from instruments i, users u where i.userid=u.id and (i.title ilike $term or i.instrument ilike $term) and u.city ilike $city and u.state ilike $state order by i.created desc limit 200"""
             params = dict(term=term, city=city, state=state)
