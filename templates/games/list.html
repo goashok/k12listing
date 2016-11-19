@@ -15,8 +15,12 @@ $def with (games, pagenum)
         $for game in games:
             <div class="job-listing  ">
               <div class="row">
-
-
+                <div class="col-xs-1">
+                  $if game.image_name:
+                    <a href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/games/${game.gameid}_${game.image_name}">
+                      <img src="/static/img/uploads/games/${game.gameid}_${game.image_name}" alt="test">
+                    </a>
+                </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-0"><h4>$game.title</h4>
                     <p>$game.console</p>
                 </div>
@@ -24,7 +28,7 @@ $def with (games, pagenum)
                    <p><span  class="label $game.labelCondition">$game.condition</span></p>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><i class="fa fa-map-marker job__location"></i>$game.city, $game.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0">$game.upload_time</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-2 col-md-offset-0">$game.upload_time</div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$game.username" data-userid="$game.userid" data-itemid="$game.gameid" data-itemtype="Game" data-itemtitle="$game.title"><span class="label label-default">Contact Seller</span></a>
                 </div>
               </div>

@@ -1,6 +1,8 @@
 import web
 import config
 import itertools
+from ImageUploader import upload
+from ImageUploader import get_filename
 from AppSession import AppSession
 
 render = web.template.render('templates/instruments',
@@ -57,15 +59,13 @@ class InstrumentPost:
         if(i.title == "" or i.condition == "" or i.price == "" or i.instrument == ""):
             appSession.flash("error", "Title, Instrument and Price are mandatory")
             return render.post()
-        if 'instr_img' in i:  # to check if the file-object is created
-            filepath = i.instr_img.filename.replace('\\', '/')  # replaces the windows-style slashes with linux ones.
-            filename = filepath.split('/')[-1]  # splits the and chooses the last part (the filename with extension)
-        postid = util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=filename)
-        uploadDir = "/home/prakash/uploads/instruments"
-        if 'instr_img' in i:  # to check if the file-object is created
-            fout = open(uploadDir + '/' + str(postid) + "_" + filename, 'w')  # creates the file where the uploaded file should be stored
-            fout.write(i.instr_img.file.read())  # writes the uploaded file to the newly created file.
-            fout.close()  # closes the file, upload complete.
+        filename = get_filename(i.get('instr_img', None))
+        if filename:
+            imagename = filename
+            postid = util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            upload('Instrument', i.instr_img, postid)
+        else:
+            util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted instrument title:{} successfully".format(i.title))
         raise web.redirect("")
 

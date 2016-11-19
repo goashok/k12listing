@@ -3,6 +3,8 @@ import config
 import itertools
 from isbn_lookup import IsbnLookup
 from AppSession import AppSession
+from ImageUploader import upload
+from ImageUploader import get_filename
 
 
 render = web.template.render('templates/books',
@@ -72,7 +74,7 @@ class BookPost:
         return render.post()
 
     def POST(self):
-        i = web.input()
+        i = web.input(book_img={})
         attrs = ['title', 'author', 'isbn']
         for attr in attrs:
             attrval = str(getattr(i, attr)).strip()
@@ -93,7 +95,14 @@ class BookPost:
         if(i.isbn == "" or i.condition == "" or i.title == "" or i.price == "" or i.price == "$"):
             appSession.flash("error", "ISBN, Title, Condition and Price are mandatory")
             return render.post()
-        util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$",""), author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
+        filename = get_filename(i.get('book_img', None))
+        if filename:
+            imagename = filename
+            postid = util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$", ""),
+                           author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            upload('Book', i.book_img, postid)
+        else:
+            util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$",""), author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted book isbn:{} successfully".format(i.isbn))
         raise web.redirect("")
 

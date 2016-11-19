@@ -54,6 +54,11 @@ create table instruments(
 
 )
 
+alter table books add image_name varchar(120);
+
+alter table games add image_name varchar(120);
+
+
 select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'book' as type
 from users u, books b
 where u.id = b.userid

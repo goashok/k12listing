@@ -42,7 +42,6 @@ $if meta:
 	    </section>
 
 
-
 <section>
       <div class="container">
         <h3 class="heading">Sampling of current <span class="accent">books</span></h3>
@@ -50,14 +49,20 @@ $if meta:
         $for book in books:
             <div class="job-listing  ">
               <div class="row">
+                <div class="col-xs-1">
+                  $if book.image_name:
+                    <a href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/books/${book.bookid}_${book.image_name}">
+                      <img src="/static/img/uploads/books/${book.bookid}_${book.image_name}" alt="test">
+                    </a>
+                </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-0"><h4>$book.title</h4  >
                     <p>$book.author <br>$book.isbn</p>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0">\$ $book.price
-             <p><span  class="label $book.labelCondition">$book.condition</span></p>
+                   <p><span  class="label $book.labelCondition">$book.condition</span></p>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><i class="fa fa-map-marker job__location"></i>$book.city, $book.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0">$book.upload_time</div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-2 col-md-offset-0">$book.upload_time</div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$book.username" data-userid="$book.userid" data-itemid="$book.bookid" data-itemtype="Book" data-itemtitle="$book.title"><span class="label label-default">Contact Seller</span></a>
                 </div>
               </div>
@@ -76,4 +81,3 @@ $if meta:
         </div>-->
       </div>
     </section>
-

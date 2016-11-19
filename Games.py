@@ -2,6 +2,8 @@ import web
 import config
 import itertools
 from AppSession import AppSession
+from ImageUploader import upload
+from ImageUploader import get_filename
 
 render = web.template.render('templates/games',
                              base='../base',
@@ -53,11 +55,17 @@ class GamePost:
         return render.post()
 
     def POST(self):
-        i = web.input()
+        i = web.input(game_img={})
         if(i.title == "" or i.condition == "" or i.price == "" or i.console == ""):
             appSession.flash("error", "Title, Condition and Price are mandatory")
             return render.post()
-        util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
+        filename = get_filename(i.get('game_img', None))
+        if filename:
+            imagename = filename
+            postid = util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            upload('Game', i.game_img, postid)
+        else:
+            util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted game title:{} successfully".format(i.title))
         raise web.redirect("")
 
