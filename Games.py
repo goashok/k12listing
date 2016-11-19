@@ -56,7 +56,7 @@ class GamePost:
             return render.post(params={})
         else:
             game = util.db.select('games', where="id = " + gameid)[0]
-            return render.post(params={'gameid' : gameid, 'console': game.console, 'title' : game.title, 'price' : game.price})
+            return render.post(params={'gameid' : gameid, 'console': game.console, 'title' : game.title, 'price' : game.price, 'condition': game.condition})
 
     def POST(self):
         i = web.input(game_img={})

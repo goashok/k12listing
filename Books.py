@@ -75,7 +75,7 @@ class BookPost:
             return render.post(params={})
         else:
             book = util.db.select('books', where="id = " + bookid)[0]
-            return render.post(params={'bookid' : bookid, 'isbn': book.isbn, 'title' : book.title, 'author': book.author, 'price' : book.price})
+            return render.post(params={'bookid' : bookid, 'isbn': book.isbn, 'title' : book.title, 'author': book.author, 'price' : book.price, 'condition': book.condition})
 
     def POST(self):
         i = web.input(book_img={})
