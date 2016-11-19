@@ -11,7 +11,8 @@ render = web.template.render('templates/instruments',
 
 urls = (
   "", "InstrumentFind",
-  "/post", "InstrumentPost"
+  "/post", "InstrumentPost",
+  "/post/(.+)", "InstrumentPost"
 )
 
 labels = {'Excellent' : 'label-success', 'Very Good' : 'label-primary', 'Good' : 'label-info', 'Fair' : 'label-warning', 'Poor' : 'label-danger'}
@@ -50,8 +51,12 @@ class InstrumentFind:
         return render.list(instruments, pagenum)
 
 class InstrumentPost:
-    def GET(self):
-        return render.post(params={})
+    def GET(self,instrid=None):
+        if not instrid:
+            return render.post(params={})
+        else:
+            instr = util.db.select('instruments', where="id = " + instrid)[0]
+            return render.post(params={'instrid': instrid, 'instrument': instr.instrument, 'condition': instr.condition, 'title': instr.title, 'price': instr.price})
 
     def POST(self):
         i = web.input(instr_img={})
@@ -61,10 +66,19 @@ class InstrumentPost:
         filename = get_filename(i.get('instr_img', None))
         if filename:
             imagename = filename
-            postid = util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            if i.instrid:
+                postid = i.instrid
+                util.db.update('instruments', where='id='+i.instrid, title=i.title, instrument=i.instrument, condition=i.condition,
+                               price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            else:
+                postid = util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
             upload('Instrument', i.instr_img, postid)
         else:
-            util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
+            if i.instrid:
+                util.db.update('instruments', where='id='+i.instrid, title=i.title, instrument=i.instrument, condition=i.condition,
+                               price=i.price, interest='Seller', userid=web.ctx.session.userid)
+            else:
+                util.db.insert('instruments', title=i.title, instrument=i.instrument, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted instrument title:{} successfully".format(i.title))
         raise web.redirect("")
 

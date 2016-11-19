@@ -13,7 +13,8 @@ render = web.template.render('templates/books',
 
 urls = (
   "", "BookFind",
-  "/post", "BookPost"
+  "/post", "BookPost",
+  "/post/(.+)", "BookPost"
 )
 
 labels = {'Excellent' : 'label-success', 'Very Good' : 'label-primary', 'Good' : 'label-info', 'Fair' : 'label-warning', 'Poor' : 'label-danger'}
@@ -69,8 +70,12 @@ class BookPost:
     def strip(self, param):
         return param.strip()
 
-    def GET(self):
-        return render.post(params={})
+    def GET(self, bookid=None):
+        if not bookid:
+            return render.post(params={})
+        else:
+            book = util.db.select('books', where="id = " + bookid)[0]
+            return render.post(params={'bookid' : bookid, 'isbn': book.isbn, 'title' : book.title, 'author': book.author, 'price' : book.price})
 
     def POST(self):
         i = web.input(book_img={})
@@ -97,11 +102,21 @@ class BookPost:
         filename = get_filename(i.get('book_img', None))
         if filename:
             imagename = filename
-            postid = util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$", ""),
+            if i.bookid:
+                util.db.update('books', where='id='+i.bookid, isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$", ""),
+                           author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+                postid = i.bookid
+            else:
+                postid = util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$", ""),
                            author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
             upload('Book', i.book_img, postid)
         else:
-            util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$",""), author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
+            if i.bookid:
+                util.db.update('books', where='id=' + i.bookid, isbn=i.isbn, isbn13=isbn13, condition=i.condition,
+                               price=i.price.replace("$", ""),
+                               author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
+            else:
+                util.db.insert('books', isbn=i.isbn, isbn13=isbn13, condition=i.condition, price=i.price.replace("$",""), author=i.author, title=i.title, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted book isbn:{} successfully".format(i.isbn))
         raise web.redirect("")
 

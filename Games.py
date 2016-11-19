@@ -11,7 +11,8 @@ render = web.template.render('templates/games',
 
 urls = (
   "", "GameFind",
-  "/post", "GamePost"
+  "/post", "GamePost",
+  "/post/(.+)", "GamePost"
 )
 
 labels = {'Excellent' : 'label-success', 'Very Good' : 'label-primary', 'Good' : 'label-info', 'Fair' : 'label-warning', 'Poor' : 'label-danger'}
@@ -50,8 +51,12 @@ class GameFind:
         return render.list(games, pagenum)
 
 class GamePost:
-    def GET(self):
-        return render.post(params={})
+    def GET(self, gameid=None):
+        if not gameid:
+            return render.post(params={})
+        else:
+            game = util.db.select('games', where="id = " + gameid)[0]
+            return render.post(params={'gameid' : gameid, 'console': game.console, 'title' : game.title, 'price' : game.price})
 
     def POST(self):
         i = web.input(game_img={})
@@ -61,10 +66,19 @@ class GamePost:
         filename = get_filename(i.get('game_img', None))
         if filename:
             imagename = filename
-            postid = util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            if i.gameid:
+                postid = i.gameid
+                util.db.update('games', where='id='+i.gameid, title=i.title, console=i.console, condition=i.condition, price=i.price,
+                               interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
+            else:
+                postid = util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid, image_name=imagename)
             upload('Game', i.game_img, postid)
         else:
-            util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
+            if i.gameid:
+                util.db.update('games', where='id='+i.gameid, title=i.title, console=i.console, condition=i.condition, price=i.price,
+                               interest='Seller', userid=web.ctx.session.userid)
+            else:
+                util.db.insert('games', title=i.title, console=i.console, condition=i.condition, price=i.price, interest='Seller', userid=web.ctx.session.userid)
         appSession.flash("success", "Posted game title:{} successfully".format(i.title))
         raise web.redirect("")
 

@@ -18,7 +18,7 @@ $else:
 	            </div>
 	          </div>
 	          <div class="col-md-8 col-md-offset-2">
-	            <form method="post" enctype="multipart/form-data">
+	            <form method="post" enctype="multipart/form-data" action="/books/post">
 	              <div class="row">
 	                <div class="col-sm-6">
 	                  <div class="form-group k12required">
@@ -64,6 +64,7 @@ $else:
 	                  </div>
 	                </div>
 	                <div class="col-sm-12 text-center">
+					  <input type="hidden" name="bookid" value="$params.get('bookid')">
 	                  <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Submit</button>
 	                </div>
 	              </div>

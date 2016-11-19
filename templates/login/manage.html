@@ -33,7 +33,8 @@ $def with (items)
                         <td>$item.identifier</td>
                         <td>$item.created</td>
                         <td>$item.price</td>
-                        <td><span class="label $item.labelCondition">$item.condition</span></td> 
+                        <td><span class="label $item.labelCondition">$item.condition</span></td>
+                        <td><a href="/${item.type.lower()}s/post/$item.itemid"><span class="label label-info">Edit</span></a></td>
                         <td><a href="/login/delete/$item.type/$item.itemid"><span class="label label-danger">Delete</span></a></td> 
                   </tr>                                  
               </tbody>

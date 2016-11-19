@@ -142,6 +142,10 @@ class Manage:
                    select u.id as userid, u.username, u.email, g.id as itemid, g.title, g.price, g.condition , g.console as identifier, 'Game' as type, g.created
                    from users u, games g
                    where u.id=$userid and u.id = g.userid
+                   union
+                   select u.id as userid, u.username, u.email, i.id as itemid, i.title, i.price, i.condition , i.instrument as identifier, 'Instrument' as type, i.created
+                   from users u, instruments i
+                   where u.id=$userid and u.id = i.userid
                    """
         items_result = util.db.query(query, vars={'userid' : web.ctx.session.userid})
         items = list(items_result)
@@ -166,6 +170,13 @@ class Delete:
                 util.db.delete('games', where="id=$itemIdInt", vars=locals())
             else:
                 appSession.flash("error", "Cannot find game or you are not the owner of the posting")
+                return Manage().GET()
+        if itemType == "Instrument":
+            instruments = util.db.select("instruments", vars=locals(), where="id = $itemIdInt")
+            if instruments and instruments[0].userid == web.ctx.session.userid:
+                util.db.delete('instruments', where="id=$itemIdInt", vars=locals())
+            else:
+                appSession.flash("error", "Cannot find " + itemType + " or you are not the owner of the posting")
                 return Manage().GET()
 
         return Manage().GET()
