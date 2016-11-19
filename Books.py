@@ -70,7 +70,7 @@ class BookPost:
         return param.strip()
 
     def GET(self):
-        return render.post()
+        return render.post(params={})
 
     def POST(self):
         i = web.input(book_img={})
@@ -83,7 +83,7 @@ class BookPost:
         isbnLkup = IsbnLookup()
         if not i.isbn:
             appSession.flash("error", "No isbn specified")
-            return render.post()
+            return render.post(i)
         try:
             meta = isbnLkup.find(i.isbn)
         except:
@@ -91,9 +91,9 @@ class BookPost:
         if not meta:
             meta = {'ISBN-13' : i.isbn}
         isbn13 = meta['ISBN-13']
-        if(i.isbn == "" or i.condition == "" or i.title == "" or i.price == "" or i.price == "$"):
-            appSession.flash("error", "ISBN, Title, Condition and Price are mandatory")
-            return render.post()
+        if(i.isbn == "" or i.condition == "" or i.title == "" or i.price == "" or i.price == "$" or i.author == ""):
+            appSession.flash("error", "ISBN, Title, Condition, Author and Price are mandatory")
+            return render.post(i)
         filename = get_filename(i.get('book_img', None))
         if filename:
             imagename = filename

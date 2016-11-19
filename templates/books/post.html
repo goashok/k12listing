@@ -1,3 +1,5 @@
+$def with(params=None)
+
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/books">Books</a></li>
@@ -19,40 +21,40 @@ $else:
 	            <form method="post" enctype="multipart/form-data">
 	              <div class="row">
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="condition">Condition</label>
 	                    <select name="condition" class="form-control input-sm">
-						  <option>Excellent</option>
-						  <option>Very Good</option>
-						  <option>Good</option>
-						  <option>Fair</option>
-						  <option>Poor</option>
+						  $for op in ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor']:
+							  $if params.get('condition') == op:
+							    <option selected="selected">$op</option>
+							  $else:
+							    <option>$op</option>
 						</select>
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="isbn">ISBN</label>
-	                    <input id="isbn" name="isbn" type="text" class="form-control">
+	                    <input id="isbn" name="isbn" type="text" class="form-control" value="$params.get('isbn')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="title">Title</label>
-	                    <input id="title" name="title" type="text" class="form-control">
+	                    <input id="title" name="title" type="text" class="form-control" value="$params.get('title')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="author">Author</label>
-	                    <input name="author" type="text" id="author" class="form-control">
+	                    <input name="author" type="text" id="author" class="form-control" value="$params.get('author')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="price">Price</label>
-	                    <input id="price" name="price" type="text" class="form-control">
+	                    <input id="price" name="price" type="text" class="form-control" value="$params.get('price')">
 	                  </div>
 	                </div>
 					<div class="col-sm-6">

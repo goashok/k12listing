@@ -1,1 +1,10 @@
 /* your styles go here */
+.k12required label:before {
+    content: "*";
+    color: red;
+    padding-left:1%;
+}
+
+/*.required {
+  color:   #2e4053;
+}*/

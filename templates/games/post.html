@@ -1,3 +1,5 @@
+$def with(params=None)
+
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/games">Games</a></li>
@@ -19,45 +21,41 @@ $else:
 	            <form method="post" enctype="multipart/form-data">
 	              <div class="row">
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="condition">Condition</label>
 	                    <select name="condition" class="form-control input-sm">
-						  <option>Excellent</option>
-						  <option>Very Good</option>
-						  <option>Good</option>
-						  <option>Fair</option>
-						  <option>Poor</option>
+						  $for op in ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor']:
+							  $if params.get('condition') == op:
+							    <option selected="selected">$op</option>
+							  $else:
+							    <option>$op</option>
 						</select>
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="console">Console</label>
 	                    <select name="console" class="form-control input-sm">
-	                      <option>3DS</option>
-						  <option>DS</option>
-						  <option>PS2</option>
-						  <option>PS3</option>
-						  <option>PS4</option>
-						  <option>Wii</option>
-						  <option>Wii U</option>
-						  <option>XBox One</option>
-						  <option>XBox 360</option>
+						  $for op in ['3DS', 'DS', 'PS2', 'PS3', 'PS4', 'Wii', 'Wii U', 'XBox One', 'XBox 36']:
+							  $if params.get('console') == op:
+							    <option selected="selected">$op</option>
+							  $else:
+							    <option>$op</option>
 						</select>
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="title">Title</label>
-	                    <input id="title" name="title" type="text" class="form-control">
+	                    <input id="title" name="title" type="text" class="form-control" value="$params.get('title')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="price">Price</label>
-	                    <input id="price" name="price" type="text" class="form-control">
+	                    <input id="price" name="price" type="text" class="form-control" value="$params.get('price')">
 	                  </div>
 	                </div>
 					<div class="col-sm-6">

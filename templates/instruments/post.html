@@ -1,3 +1,5 @@
+$def with(params=None)
+
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/instruments">Instruments</a></li>
@@ -19,80 +21,40 @@ $else:
 	            <form method="post" enctype="multipart/form-data">
 	              <div class="row">
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="condition">Condition</label>
 	                    <select name="condition" class="form-control input-sm">
-						  <option>Excellent</option>
-						  <option>Very Good</option>
-						  <option>Good</option>
-						  <option>Fair</option>
-						  <option>Poor</option>
+						  $for op in ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor']:
+							  $if params.get('condition') == op:
+							    <option selected="selected">$op</option>
+							  $else:
+							    <option>$op</option>
 						</select>
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="instrument">Instrument</label>
-	                    <select name="instrument" class="form-control input-sm">
-	                        <option>ALTO SAX</option>
-							<option>BARITONE HORN</option>
-							<option>BELL KIT</option>
-							<option>CELLO 1/2</option>
-							<option>CELLO 1/4</option>
-							<option>CELLO 3/4</option>
-							<option>CELLO 4/4</option>
-							<option>CELLO</option>
-							<option>BASS CLARINET*</option>
-							<option>CLARINET</option>
-							<option>DOUBLE BASS</option>
-							<option>DOUBLE BASS 1/2</option>
-							<option>DOUBLE BASS 1/4</option>
-							<option>DOUBLE BASS 1/8</option>
-							<option>DOUBLE BASS 3/4</option>
-							<option>DOUBLE HORN</option>
-							<option>DRUM KIT</option>
-							<option>EUPHONIUM</option>
-							<option>FLUTE</option>
-							<option>FRENCH HORN</option>
-							<option>GUITAR ACOUSTIC</option>
-							<option>GUITAR ELECTRIC</option>
-							<option>OBOE</option>
-							<option>PICCOLO</option>
-							<option>MP-KIT</option>
-							<option>TENOR SAX</option>
-							<option>TROMBONE</option>
-							<option>TRUMPET</option>
-							<option>VIOLA</option>
-							<option>VIOLA 10 INCH</option>
-							<option>VIOLA 11 INCH</option>
-							<option>VIOLA 12 INCH</option>
-							<option>VIOLA 13 INCH</option>
-							<option>VIOLA 14 INCH</option>
-							<option>VIOLA 15 INCH</option>
-							<option>VIOLA 15 1/2 INCH</option>
-							<option>VIOLA 16 INCH</option>
-							<option>VIOLA 16 1/2 INCH</option>
-							<option>VIOLIN</option>
-							<option>VIOLIN 1/8</option>
-							<option>VIOLIN 4/4</option>
-							<option>VIOLIN 1/2</option>
-							<option>VIOLIN 1/4</option>
-							<option>VIOLIN 3/4</option>
-							<option>VIOLIN 1/10</option>
-							<option>OTHER</option>
+						<select name="instrument" class="form-control input-sm">
+						  $for op in ['ALTO SAX', 'BARITONE HORN', 'BELL KIT', 'CELLO 1/2', 'CELLO 1/4', 'CELLO 3/4', 'CELLO 4/4', 'CELLO', 'CLARINET', 'BASS CLARINET', 'DOUBLE BASS', 'DOUBLE BASS 1/2', 'DOUBLE BASS 1/4', 'DOUBLE BASS 1/8', 'DOUBLE BASS 3/4', 'DOUBLE HORN', 'DRUM KIT', 'EUPHONIUM', 'FLUTE', 'FRENCH HORN', 'GUITAR ACOUSTIC', 'GUITAR ELECTRIC', 'OBOE', 'PICCOLO', 'MP-KIT', 'TENOR SAX', 'TROMBONE', 'TRUMPET', 'VIOLA', 'VIOLA 10 INCH', 'VIOLA 11 INCH', 'VIOLA 12 INCH', 'VIOLA 13 INCH', 'VIOLA 14 INCH','VIOLA 15 INCH', 'VIOLA 15-1/2 INCH', 'VIOLA 16 INCH', 'VIOLA 16-1/2 INCH', 'VIOLIN', 'VIOLIN 1/8', 'VIOLIN 4/4', 'VIOLIN 1/4', 'VIOLIN 1/2', 'VIOLIN 3/4', 'VIOLIN 1/10', 'OTHER']:
+							  $if params.get('instrument') == op:
+							    <option selected="selected">$op</option>
+							  $else:
+							    <option>$op</option>
 						</select>
+
 	                   <!--  <input id="contion" type="text" class="form-control"> -->
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="title">Title</label>
 	                    <input id="title" name="title" type="text" class="form-control">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
-	                  <div class="form-group">
+	                  <div class="form-group k12required">
 	                    <label for="price">Price</label>
 	                    <input id="price" name="price" type="text" class="form-control">
 	                  </div>

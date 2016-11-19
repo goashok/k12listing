@@ -51,13 +51,13 @@ class GameFind:
 
 class GamePost:
     def GET(self):
-        return render.post()
+        return render.post(params={})
 
     def POST(self):
         i = web.input(game_img={})
         if(i.title == "" or i.condition == "" or i.price == "" or i.console == ""):
             appSession.flash("error", "Title, Condition and Price are mandatory")
-            return render.post()
+            return render.post(i)
         filename = get_filename(i.get('game_img', None))
         if filename:
             imagename = filename

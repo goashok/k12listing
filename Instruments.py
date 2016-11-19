@@ -51,13 +51,13 @@ class InstrumentFind:
 
 class InstrumentPost:
     def GET(self):
-        return render.post()
+        return render.post(params={})
 
     def POST(self):
         i = web.input(instr_img={})
         if(i.title == "" or i.condition == "" or i.price == "" or i.instrument == ""):
             appSession.flash("error", "Title, Instrument and Price are mandatory")
-            return render.post()
+            return render.post(i)
         filename = get_filename(i.get('instr_img', None))
         if filename:
             imagename = filename
