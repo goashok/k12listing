@@ -12,24 +12,30 @@ $def with (items)
             <table class="table table-striped table-condensed">
                   <thead>
                   <tr>
-                      <th>Username</th>
-                      <th>Email</th>
+                      <th>Image</th>
                       <th>Item</th>
                       <th>Title</th>
                       <th>Desciption</th>
                       <th>Posted On</th>
                       <th>Price</th>
                       <th>Condition</th> 
-                      <th>Action</th>                                         
+                      <th>Edit</th>
+                      <th>Delete</th>
                   </tr>
               </thead>   
               <tbody>
                 $for item in items:
                     <tr>
-                        <td>$item.username</td>
-                        <td>$item.email</td>
+                        <td>
+                            <div class="col-xs-5 col-sm-4" >
+                                $if item.image_name:
+                                    <a  href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/${item.type.lower()}s/${item.itemid}_${item.image_name}">
+                                        <img src="/static/img/uploads/${item.type.lower()}s/${item.itemid}_${item.image_name}" alt="test">
+                                    </a>
+                            </div>
+                        </td>
                         <td>$item.type</td>
-                        <td>$item.title</td>
+                        <td><h5 align="center">$item.title</h5></td>
                         <td>$item.identifier</td>
                         <td>$item.created</td>
                         <td>$item.price</td>

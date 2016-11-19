@@ -135,15 +135,15 @@ class Forgot:
 
 class Manage:
     def GET(self):
-        query = """select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'Book' as type, b.created
+        query = """select u.id as userid, u.username, u.email, b.id as itemid, b.title, b.price, b.condition, b.isbn as identifier, 'Book' as type, to_char(b.created, 'YYYY-MM-DD') as created, b.image_name
                    from users u, books b
                    where u.id=$userid and u.id = b.userid
                    union
-                   select u.id as userid, u.username, u.email, g.id as itemid, g.title, g.price, g.condition , g.console as identifier, 'Game' as type, g.created
+                   select u.id as userid, u.username, u.email, g.id as itemid, g.title, g.price, g.condition , g.console as identifier, 'Game' as type, to_char(g.created, 'YYYY-MM-DD') as created, g.image_name
                    from users u, games g
                    where u.id=$userid and u.id = g.userid
                    union
-                   select u.id as userid, u.username, u.email, i.id as itemid, i.title, i.price, i.condition , i.instrument as identifier, 'Instrument' as type, i.created
+                   select u.id as userid, u.username, u.email, i.id as itemid, i.title, i.price, i.condition , i.instrument as identifier, 'Instrument' as type, to_char(i.created, 'YYYY-MM-DD') as created, i.image_name
                    from users u, instruments i
                    where u.id=$userid and u.id = i.userid
                    """
