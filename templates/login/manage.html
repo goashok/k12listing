@@ -21,13 +21,14 @@ $def with (items)
                 </div>
                 <div class="col-sm-3"><h4>$item.title</h4></div>
                 <div class="col-sm-1">$item.type</div>
-                <div class="col-sm-1"><a href="/${item.type.lower()}s/post/$item.itemid"><span class="label label-info">Edit</span></a></div>
                 <div class="col-sm-2">$item.identifier</div>
-                <div class="col-sm-2">$item.price
-                    <p><span class="label $item.labelCondition">$item.condition</span></p>
-                </div>
+                <div class="col-sm-1">$item.price</div>
                 <div class="col-sm-1">$item.created</div>
-                <div class="col-sm-1"><a href="/login/delete/$item.type/$item.itemid"><span class="label label-danger">Delete</span></a></div>
+                <div class="col-sm-1 col-sm-offset-1"><p><span class="label $item.labelCondition">$item.condition</span></p></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 col-sm-offset-1"><a href="/${item.type.lower()}s/post/$item.itemid"><span class="label label-info">Edit</span></a></div>
+                <div class="col-sm-4"><a href="/login/delete/$item.type/$item.itemid"><span class="label label-danger">Delete</span></a></div>
 
               </div>
             </div>
