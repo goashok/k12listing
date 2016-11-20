@@ -27,7 +27,7 @@ $def with (items)
                 $for item in items:
                     <tr>
                         <td>
-                            <div class="col-xs-5 col-sm-4" >
+                            <div class="col-xs-8 col-sm-4" >
                                 $if item.image_name:
                                     <a  href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/${item.type.lower()}s/${item.itemid}_${item.image_name}">
                                         <img src="/static/img/uploads/${item.type.lower()}s/${item.itemid}_${item.image_name}" alt="test">
