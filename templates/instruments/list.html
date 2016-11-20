@@ -15,21 +15,21 @@ $def with (instruments, pagenum)
         $for instrument in instruments:
             <div class="job-listing  ">
               <div class="row">
-                <div class="col-xs-1">
+                <div class="col-sm-1">
                   $if instrument.image_name:
                     <a href="#lightbox-modal" class="thumbnail class-lightbox" data-toggle="modal" data-imgsrc="/static/img/uploads/instruments/${instrument.instrumentid}_${instrument.image_name}">
                       <img src="/static/img/uploads/instruments/${instrument.instrumentid}_${instrument.image_name}" alt="test">
                     </a>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-0"><h4>$instrument.title</h4>
+                <div class="col-sm-3"><h4>$instrument.title</h4>
                     <p>$instrument.instrument</p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0">\$ $instrument.price
+                <div class="col-sm-2">\$ $instrument.price
                    <p><span  class="label $instrument.labelCondition">$instrument.condition</span></p>
                 </div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><i class="fa fa-map-marker job__location"></i>$instrument.city, $instrument.state</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-2 col-md-offset-0">$instrument.upload_time</div>
-                <div class="col-xs-10 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$instrument.username" data-userid="$instrument.userid" data-itemid="$instrument.instrumentid" data-itemtype="Instrument" data-itemtitle="$instrument.title"><span class="label label-default">Contact Seller</span></a></div>
+                <div class="col-sm-2"><i class="fa fa-map-marker job__location"></i>$instrument.city, $instrument.state</div>
+                <div class="col-sm-2">$instrument.upload_time</div>
+                <div class="col-sm-2"><a href="#contactFormModal" class="class-contactFormModal" data-toggle="modal" data-username="$instrument.username" data-userid="$instrument.userid" data-itemid="$instrument.instrumentid" data-itemtype="Instrument" data-itemtitle="$instrument.title"><span class="label label-default">Contact Seller</span></a></div>
 
               </div>
             </div>
