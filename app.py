@@ -19,6 +19,7 @@ urls = (
     '/instruments', Instruments.app_instruments,
     '/contact', Contact.app_contact,
     '/logout', 'Logout',
+    '/terms', 'Terms',
     '/about', 'About',
     r'/', 'Index',
     )
@@ -57,6 +58,10 @@ class Index:
 class About:
     def GET(self):
         return render.about()
+
+class Terms:
+    def GET(self):
+        return render.terms()
 
 class Logout:
     def GET(self):
