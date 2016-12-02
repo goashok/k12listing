@@ -37,7 +37,7 @@ $else:
 	                  <div class="form-group k12required">
 	                    <label for="console">Console</label>
 	                    <select name="console" class="form-control input-sm">
-						  $for op in ['3DS', 'DS', 'PS2', 'PS3', 'PS4', 'Wii', 'Wii U', 'XBox One', 'XBox 36']:
+						  $for op in ['3DS', 'DS', 'PS2', 'PS3', 'PS4', 'Wii', 'Wii U', 'XBox One', 'XBox 360']:
 							  $if params.get('console') == op:
 							    <option selected="selected">$op</option>
 							  $else:
