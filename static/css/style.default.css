@@ -768,6 +768,18 @@ fieldset[disabled] .btn-white.active {
   background: center center url('../img/meeting.jpg') no-repeat;
   background-size: cover;
 }
+.job-form-section.job-form-section--books {
+  background: center center url('../img/books.jpg') no-repeat;
+  background-size: cover;
+}
+.job-form-section.job-form-section--games {
+  background: center center url('../img/games.jpg') no-repeat;
+  background-size: cover;
+}
+.job-form-section.job-form-section--music {
+  background: center center url('../img/music.jpg') no-repeat;
+  background-size: cover;
+}
 .job-main-form__button {
   margin-top: 25px;
   display: block;
