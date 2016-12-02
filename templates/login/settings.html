@@ -1,53 +1,89 @@
 $def with (user)
 
-<div class="container">
-        <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-        	<div class="panel panel-default">
-        		<div class="panel-heading">
-			    		<h3 class="panel-title">User Profile</h3>
-			 			</div>
-			 			<div class="panel-body">
-			    		<form method="post" role="form" >
-			    			<div class="row">
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
-			    					<div class="form-group">
-			                <input type="text" name="first_name" id="first_name" class="form-control input-sm" value="$user.first_name" placeholder="First Name">
-			    					</div>
-			    				</div>
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
-			    					<div class="form-group">
-			    						<input type="text" name="last_name" id="last_name" class="form-control input-sm" value="$user.last_name" placeholder="Last Name">
-			    					</div>
-			    				</div>
-			    			</div>
-
-			    			<div class="row">
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
-			    					<div class="form-group">
-			                <input type="text" name="age" id="age" class="form-control input-sm" value="$user.age" placeholder="Age">
-			    					</div>
-			    				</div>
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
-			    					<div class="form-group">
-			    						<input type="text" name="username" id="user_name" class="form-control input-sm" value="$user.username" disabled>
-			    					</div>
-			    				</div>
-			    			</div>
-
-			    			<div class="form-group">
-			    				<input type="email" name="email" id="email" class="form-control input-sm" value="$user.email" placeholder="Email">
-			    			</div>
-
-			    			<div class="form-group">		
-			    				<input type="phone" name="phone" id="phone" class="form-control input-sm" value="$user.phone" placeholder="Phone">
-			    			</div>
-			    			<input type="hidden" name="userid" value="$user.id" />
-			    			<input type="submit" value="Save" class="btn btn-info btn-block">
-			    		
-			    		</form>
-			    	</div>
-	    		</div>
-    		</div>
-    	</div>
-    </div>
+<section style="background: #fafafa;">
+	      <div class="container">
+	        <div class="row margin-bottom">
+	          <div class="col-md-12 text-center">
+	            <div class="heading">
+	              <h2>Update your profile settings.</h2>
+	            </div>
+	          </div>
+	          <div class="col-md-8 col-md-offset-2">
+	            <form method="post">
+	              <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="first_name">First Name</label>
+	                    <input id="first_name" name="first_name" type="text" class="form-control" value="$user.first_name" disabled>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="last_name">Last Name</label>
+	                    <input id="last_name" name="last_name" type="text" class="form-control" value="$user.last_name" disabled>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="age">Age</label>
+	                    <input name="age" type="text" id="age" class="form-control" value="$user.age" disabled>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="city">City</label>
+	                    <input id="city" name="city" type="text" class="form-control" value="$user.city">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="state">State</label>
+	                    <input id="state" name="state" type="text" class="form-control" value="$user.state">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="zip">Zip</label>
+	                    <input id="zip" name="zip" type="text" class="form-control" value="$user.zip">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="email">Email</label>
+	                    <input id="email" name="email" type="email" class="form-control" value="$user.email">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="phone">Phone</label>
+	                    <input id="phone" name="phone" type="phone" class="form-control" value="$user.phone">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="username">User Name</label>
+	                    <input id="username" name="username" type="text" class="form-control" value="$user.username" disabled>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="password">Password</label>
+	                    <input id="password" name="password" type="password" class="form-control" value="$user.password">
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label for="password_confirmation">Confirm Password</label>
+	                    <input id="password_confirmation" name="password_confirmation" type="password" class="form-control">
+	                  </div>
+	                </div>
+	                <div class="col-sm-12 text-center">
+					  <input type="hidden" name="userid" value="$user.id" />
+	                  <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Submit</button>
+	                </div>
+	              </div>
+	            </form>
+	          </div>
+	        </div>
+	    </div>
+	</section>

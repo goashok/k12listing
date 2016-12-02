@@ -94,7 +94,13 @@ $code:
               </li>
               <li class="$get_nav_class('about')"><a href="/about">About us</a></li>
               $if isLoggedIn:
-                  <li class="$get_nav_class('manage')"><a href="/login/manage">Manage</a></li>
+                  <li class="dropdown $get_nav_class('manage')"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Manage <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/login/manage">Posts</a></li>
+                      <li><a href="/login/settings">Profile</a></li>
+                    </ul>
+                  </li>
+                  <!--<li class="$get_nav_class('manage')"><a href="/login/manage">Manage</a></li>-->
             </ul>
             $if isLoggedIn:
                 <a href="/logout" class="btn navbar-btn btn-white"><i class="fa fa-sign-in"></i>Logout</a>

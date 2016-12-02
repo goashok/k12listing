@@ -1,3 +1,5 @@
+$def with(params=None)
+
 <section style="background: #fafafa;">
 	      <div class="container">
 	        <div class="row margin-bottom">
@@ -12,61 +14,61 @@
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="first_name">First Name</label>
-	                    <input id="first_name" name="first_name" type="text" class="form-control">
+	                    <input id="first_name" name="first_name" type="text" class="form-control" value="$params.get('first_name')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="last_name">Last Name</label>
-	                    <input id="last_name" name="last_name" type="text" class="form-control">
+	                    <input id="last_name" name="last_name" type="text" class="form-control" value="$params.get('last_name')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="age">Age</label>
-	                    <input name="age" type="text" id="age" class="form-control">
+	                    <input name="age" type="text" id="age" class="form-control" value="$params.get('age')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="city">City</label>
-	                    <input id="city" name="city" type="text" class="form-control">
+	                    <input id="city" name="city" type="text" class="form-control" value="$params.get('city')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="state">State</label>
-	                    <input id="state" name="state" type="text" class="form-control">
+	                    <input id="state" name="state" type="text" class="form-control" value="$params.get('state')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="zip">Zip</label>
-	                    <input id="zip" name="zip" type="text" class="form-control">
+	                    <input id="zip" name="zip" type="text" class="form-control" value="$params.get('zip')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="email">Email</label>
-	                    <input id="email" name="email" type="email" class="form-control">
+	                    <input id="email" name="email" type="email" class="form-control" value="$params.get('email')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="phone">Phone</label>
-	                    <input id="phone" name="phone" type="phone" class="form-control">
+	                    <input id="phone" name="phone" type="phone" class="form-control" value="$params.get('phone')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="username">User Name</label>
-	                    <input id="username" name="username" type="text" class="form-control">
+	                    <input id="username" name="username" type="text" class="form-control" value="$params.get('username')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">
 	                  <div class="form-group">
 	                    <label for="password">Password</label>
-	                    <input id="password" name="password" type="password" class="form-control">
+	                    <input id="password" name="password" type="password" class="form-control" value="$params.get('password')">
 	                  </div>
 	                </div>
 	                <div class="col-sm-6">

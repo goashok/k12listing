@@ -57,7 +57,7 @@ class Login:
 class Register:
 
     def GET(self):
-        return render.register()
+        return render.register(params={})
 
     def POST(self):
     	i = web.input()
@@ -67,21 +67,21 @@ class Register:
         users_byemail = util.db.select('users', params, where="email = $email")
         if users_byemail:
             appSession.flash("error", "User with email {} already exists".format(i.email))
-            return render.register()
+            return render.register(i)
     	users = util.db.select('users', params, where="username = $username")
     	if users:
             appSession.flash("error", "Username {} is already registered".format(i.username))
-            return render.register()
+            return render.register(i)
         else:
-            if(i.username == "" or i.first_name == "" or i.last_name == "" or i.age == "" or i.email == ""  or i.password == "" or i.password_confirmation == ""):
-                appSession.flash("error", "First/Last Name, Age, Email , Password is required")
-                return render.register()
+            if(i.username == "" or i.first_name == "" or i.last_name == "" or i.age == "" or i.email == ""  or i.password == "" or i.password_confirmation == "" or i.zip == "" or i.state == "" or i.city == ""):
+                appSession.flash("error", "Username, First/Last Name, Age, Email , City, State, Zip, Password is required")
+                return render.register(i)
             if int(i.age) < 18:
                 appSession.flash("error", "You must be 18 or older to register")
-                return render.register()
+                return render.register(i)
             if(i.password != i.password_confirmation):
                 appSession.flash("error", "Passwords do not match")
-                return render.register()
+                return render.register(i)
             util.db.insert('users', username=i.username, password=i.password, first_name=i.first_name, last_name=i.last_name, age=i.age, email=i.email, phone=i.phone, city=i.city, state=i.state, zip=i.zip)
             appSession.flash("success", "Successfully registered user {}".format(i.username))
             siteurl = web.ctx.env.get('HTTP_HOST', '')
@@ -95,7 +95,7 @@ class Settings:
     	params = dict(username=username)
     	users = util.db.select('users', params, where='username = $username')
     	if not users:
-            appSession.flash("error", "User {} not found".format(i.username))
+            appSession.flash("error", "User {} not found".format(username))
             return render.settings()
         user = users[0]
         return render.settings(user)
@@ -103,19 +103,21 @@ class Settings:
     def POST(self):
     	i = web.input()
     	params = dict(userid=i.userid)
-    	userid = i.userid
-    	where = ""
     	users = util.db.select('users', params, where="id = $userid")
+        user = users[0]
     	if not users:
             appSession.flash("error", "Cannot find User with id {}".format(i.userid))
-            return render.settings(users[0])
+            return render.settings(user)
     	else:
-            if(i.first_name == "" or i.last_name == "" or i.age == "" or i.email == "" or i.phone == ""):
-                appSession.flash("error", "First/Last name, age , email, phone is required")
-                return render.settings(users[0])
-    	    util.db.update('users', where="id = $userid", first_name=i.first_name, last_name=i.last_name, age=i.age, email=i.email, phone=i.phone, vars=params)
-            appSession.flash("success", "Updated user {} successfully".format(users[0].username))
-    	    return render.settings(users[0])
+            if(i.city == "" or i.state == "" or i.zip == "" or i.email == "" or i.password == ""):
+                appSession.flash("error", "City, State, Zip, Email, Password is required")
+                return render.settings(user)
+            if (i.password != i.password_confirmation):
+                appSession.flash("error", "Passwords do not match")
+                return render.settings(user)
+    	    util.db.update('users', where="id = $userid", email=i.email, phone=i.phone, city=i.city, state=i.state, zip=i.zip, password=i.password, vars=params)
+            appSession.flash("success", "Updated user {} successfully".format(user.username))
+    	    return render.settings(user)
 
 class Forgot:
     def GET(self):
