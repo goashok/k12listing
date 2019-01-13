@@ -21,6 +21,7 @@ urls = (
     '/logout', 'Logout',
     '/terms', 'Terms',
     '/about', 'About',
+    '/google956afd22da6840e3.html', 'GoogleIndex',
     r'/', 'Index',
     )
 
@@ -55,6 +56,11 @@ class Index:
         #models in model.py, tests in test.py, and seed data in seed.py.""")
         return render.index()
 
+class GoogleIndex:
+    def GET(self):
+        googlerender = web.template.render('templates/', cache=config.cache)
+        return googlerender.google956afd22da6840e3()
+ 
 class About:
     def GET(self):
         return render.about()
